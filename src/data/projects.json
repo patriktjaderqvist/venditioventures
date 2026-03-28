@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "title": "E-Commerce Platform",
+    "description": "Full-stack marketplace with real-time inventory, payment processing, and admin dashboard. Built for a client in the retail sector.",
+    "image": "",
+    "tags": ["React", "Node.js", "PostgreSQL", "Stripe"],
+    "category": "ventures",
+    "links": {
+      "live": "https://example.com",
+      "github": "https://github.com"
+    }
+  },
+  {
+    "id": "2",
+    "title": "AI Analytics Dashboard",
+    "description": "Data visualization platform with ML-powered insights and predictive analytics for business KPIs.",
+    "image": "",
+    "tags": ["Python", "React", "TensorFlow", "D3.js"],
+    "category": "ventures",
+    "links": {
+      "live": "",
+      "github": "https://github.com"
+    }
+  },
+  {
+    "id": "3",
+    "title": "Supply Chain Optimizer",
+    "description": "University thesis project — optimization algorithm for logistics route planning with 30% cost reduction.",
+    "image": "",
+    "tags": ["Python", "Operations Research", "Flask"],
+    "category": "academic",
+    "links": {
+      "live": "",
+      "github": "https://github.com"
+    }
+  },
+  {
+    "id": "4",
+    "title": "Mobile Banking App",
+    "description": "Fintech mobile application with biometric auth, real-time transactions, and spending analytics.",
+    "image": "",
+    "tags": ["React Native", "Firebase", "Plaid API"],
+    "category": "consulting",
+    "links": {
+      "live": "https://example.com",
+      "github": ""
+    }
+  },
+  {
+    "id": "5",
+    "title": "Brand Identity System",
+    "description": "Complete brand strategy and visual identity for a startup, including logo, guidelines, and marketing materials.",
+    "image": "",
+    "tags": ["Branding", "Figma", "Strategy"],
+    "category": "consulting",
+    "links": {
+      "live": "https://example.com",
+      "github": ""
+    }
+  }
+]

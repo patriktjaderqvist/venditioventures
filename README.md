@@ -44,6 +44,14 @@ src/
 └── index.css                # Global styles and CSS variables
 ```
 
+## Deploying to Vercel
+
+1. Push the repo to GitHub.
+2. Import the project at [vercel.com/new](https://vercel.com/new).
+3. Vercel auto-detects Vite — no extra config needed. Click **Deploy**.
+
+The included `vercel.json` sets the build command, output directory, and a catch-all rewrite for client-side routing.
+
 ## Admin Mode
 
 Append `?admin=true` to the URL to enable adding and removing projects. Custom projects are persisted in localStorage.
