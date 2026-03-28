@@ -1,6 +1,6 @@
 # Venditio Ventures
 
-A portfolio website for Patrik Tjaeder Qvist featuring an interactive 3D folder experience that opens to reveal a project gallery. Built with React, Three.js, and Framer Motion.
+A portfolio website for Patrik Tjäderqvist featuring an interactive 3D folder experience that opens to reveal a project gallery. Built with React, Three.js, and Framer Motion.
 
 ## Tech Stack
 
