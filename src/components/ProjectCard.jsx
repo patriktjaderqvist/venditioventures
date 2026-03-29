@@ -62,7 +62,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
       {/* Image area — dark with wireframe placeholder */}
       <div
         className="aspect-[16/10] w-full relative overflow-hidden flex items-center justify-center"
-        style={{ background: 'linear-gradient(145deg, #252528 0%, #1a1a1e 100%)' }}
+        style={{ background: 'linear-gradient(145deg, #252528 0%, #1a1a1e 100%)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
       >
         {project.image ? (
           <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
