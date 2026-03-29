@@ -39,7 +39,7 @@ function CVIcon() {
 
 const BORDER_DESKTOP = 'clamp(20px, 3vw, 50px)'
 const BORDER_MOBILE = 10
-const TAB_HEIGHT = 38
+const TAB_HEIGHT = 48
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768)
@@ -137,35 +137,47 @@ function useProjects() {
 /* ── Folder Tab ─────────────────────────────────────────── */
 
 function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
-  // Same color for all tabs — matches the paper exactly
   const bg = 'var(--bg-elevated)'
   const EAR = isMobile ? 5 : 8
+  const isFirst = index === 0
   const isLast = index === total - 1
+
+  // Build clip-path for folder-shaped tabs
+  // First tab: angled left edge (like 3D folder tab left side)
+  // Last tab: angled right edge (like 3D folder tab right side)
+  // Middle tabs: standard rectangular with rounded top
+  // Match the 3D folder tab: subtle left angle, steeper right angle
+  let tabClipPath
+  if (isFirst) {
+    tabClipPath = 'polygon(0% 100%, 0% 18%, 6% 0%, 100% 0%, 100% 100%)'
+  } else if (isLast) {
+    tabClipPath = 'polygon(0% 0%, 78% 0%, 100% 50%, 100% 100%, 0% 100%)'
+  }
 
   return (
     <div
       className="relative"
       style={{
-        // "The Story" (index 0) is closest, each next tab goes further back
-        // Active tab always jumps to the very front
         zIndex: isActive ? 20 : (total - index),
-        transform: isActive ? 'translateY(1px)' : 'translateY(10px)',
+        transform: isActive ? 'translateY(4px)' : 'translateY(10px)',
         marginRight: isLast ? 0 : `-${EAR * 2 + 6}px`,
         filter: 'none',
       }}
     >
-      {/* Left ear — inverse radius curve */}
-      <div
-        className="absolute bottom-0 left-0"
-        style={{ width: EAR, height: EAR, background: 'transparent', overflow: 'hidden' }}
-      >
-        <div style={{
-          position: 'absolute', bottom: 0, right: 0,
-          width: EAR * 2, height: EAR * 2,
-          borderRadius: `0 0 ${EAR}px 0`,
-          boxShadow: `${EAR / 2}px ${EAR / 2}px 0 ${EAR / 2}px ${bg}`,
-        }} />
-      </div>
+      {/* Left ear — inverse radius curve (not on first tab) */}
+      {!isFirst && (
+        <div
+          className="absolute bottom-0 left-0"
+          style={{ width: EAR, height: EAR, background: 'transparent', overflow: 'hidden' }}
+        >
+          <div style={{
+            position: 'absolute', bottom: 0, right: 0,
+            width: EAR * 2, height: EAR * 2,
+            borderRadius: `0 0 ${EAR}px 0`,
+            boxShadow: `${EAR / 2}px ${EAR / 2}px 0 ${EAR / 2}px ${bg}`,
+          }} />
+        </div>
+      )}
 
       {/* Right ear — inverse radius curve (not on last tab) */}
       {!isLast && (
@@ -185,11 +197,19 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
       {/* Main tab body */}
       <button
         onClick={onClick}
-        className="relative cursor-pointer transition-all duration-300"
+        className="relative cursor-pointer transition-colors duration-300"
         style={{
           height: TAB_HEIGHT + 6,
-          padding: isMobile ? '0 8px' : '0 clamp(12px, 1.5vw, 22px)',
+          paddingTop: 0,
+          paddingBottom: 0,
+          paddingLeft: isFirst
+            ? (isMobile ? '14px' : 'clamp(18px, 2vw, 30px)')
+            : (isMobile ? '8px' : 'clamp(12px, 1.5vw, 22px)'),
+          paddingRight: isLast
+            ? (isMobile ? '14px' : 'clamp(18px, 2vw, 30px)')
+            : (isMobile ? '8px' : 'clamp(12px, 1.5vw, 22px)'),
           margin: `0 ${EAR}px`,
+          marginLeft: isFirst ? 0 : `${EAR}px`,
           marginRight: isLast ? 0 : `${EAR}px`,
           fontSize: isMobile ? '7px' : 'clamp(7.5px, 0.75vw, 9.5px)',
           letterSpacing: '0.14em',
@@ -199,6 +219,7 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
           color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.5)',
           background: bg,
           borderRadius: '6px 6px 0 0',
+          clipPath: tabClipPath || undefined,
           border: 'none',
           display: 'flex',
           alignItems: 'center',
@@ -216,24 +237,6 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
         {tab.label}
       </button>
 
-      {/* Folder edge — angled right side on last tab, matching 3D folder tab */}
-      {isLast && (
-        <svg
-          style={{
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            height: '100%',
-            width: isMobile ? 14 : 20,
-          }}
-          viewBox="0 0 20 44"
-          preserveAspectRatio="none"
-          fill="var(--bg-elevated)"
-        >
-          <path d="M0,0 L0,44 L20,44 L20,20 Q20,17 18,15 L4,2 Q2,0 0,0 Z" />
-        </svg>
-      )}
-
       {/* Depth gradient — darker toward bottom-left, more intense for tabs further back */}
       {!isActive && (
         <div
@@ -242,6 +245,7 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
             left: EAR, right: EAR,
             height: '100%',
             borderRadius: '6px 6px 0 0',
+            clipPath: tabClipPath || undefined,
             background: `linear-gradient(to top right,
               rgba(0,0,0,${0.15 + index * 0.1}) 0%,
               rgba(0,0,0,${0.06 + index * 0.04}) 50%,
@@ -293,7 +297,7 @@ function CloseTab({ onClick }) {
 
       <button
         onClick={onClick}
-        className="relative cursor-pointer transition-all duration-300"
+        className="relative cursor-pointer transition-colors duration-300"
         style={{
           height: TAB_HEIGHT + 6,
           padding: '0 18px',
@@ -899,9 +903,9 @@ export default function ProjectGallery({ onClose }) {
             background: 'var(--bg-elevated)',
             borderRadius: '16px',
             boxShadow: `
-              0 12px 50px rgba(0,0,0,0.4),
-              0 25px 80px rgba(0,0,0,0.3),
-              0 4px 20px rgba(0,0,0,0.2)
+              0 4px 14px rgba(0,0,0,0.5),
+              0 10px 28px rgba(0,0,0,0.4),
+              0 2px 6px rgba(0,0,0,0.3)
             `,
             minHeight: '120vh',
             position: 'relative',
