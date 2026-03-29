@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 function LinkIcon({ type }) {
@@ -18,21 +19,31 @@ function LinkIcon({ type }) {
 }
 
 export default function ProjectCard({ project, index, isAdmin, onRemove }) {
-  // Fan-out: cards start stacked at center, then spread to their grid positions
   const fanAngles = [-12, 0, 12, -8, 8]
   const angle = fanAngles[index % fanAngles.length]
+  const descRef = useRef(null)
+  const [isTruncated, setIsTruncated] = useState(false)
+
+  useEffect(() => {
+    const el = descRef.current
+    if (el) setIsTruncated(el.scrollHeight > el.clientHeight)
+  }, [project.description])
 
   return (
     <motion.div
-      className="relative group rounded-2xl overflow-hidden"
+      className="relative group overflow-hidden flex flex-col"
+      initial={{ borderRadius: '16px' }}
       whileHover={{
-        y: -4,
-        transition: { duration: 0.25, ease: 'easeOut' },
+        borderRadius: '0px',
+        scale: 1.03,
+        boxShadow: '0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.12)',
+        transition: { duration: 0.35, ease: [0.25, 0.8, 0.25, 1] },
       }}
       style={{
         background: '#1c1c20',
         border: '1px solid rgba(255,255,255,0.08)',
         boxShadow: '0 4px 24px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.12)',
+        height: '100%',
       }}
     >
       {/* Admin remove button */}
@@ -61,11 +72,11 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
 
       {/* Image area — dark with wireframe placeholder */}
       <div
-        className="aspect-[16/10] w-full relative overflow-hidden flex items-center justify-center"
+        className="aspect-[4/3] w-full relative overflow-hidden flex items-center justify-center flex-shrink-0"
         style={{ background: 'linear-gradient(145deg, #252528 0%, #1a1a1e 100%)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
       >
         {project.image ? (
-          <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+          <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top" />
         ) : (
           /* Wireframe-style placeholder like the reference */
           <div className="w-[75%] h-[70%] relative">
@@ -88,31 +99,58 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
         )}
       </div>
 
-      {/* Content */}
-      <div className="p-5">
+      {/* Content — fixed height with truncation */}
+      <div className="p-5 flex flex-col flex-1">
         <h3
-          className="text-sm font-medium tracking-wide"
-          style={{ color: 'rgba(255,255,255,0.92)' }}
+          className="font-medium tracking-wide"
+          style={{ color: 'rgba(255,255,255,0.92)', fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)' }}
         >
           {project.title}
         </h3>
         <p
-          className="text-xs mt-2 leading-relaxed"
-          style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 300 }}
+          ref={descRef}
+          className="mt-2 leading-relaxed"
+          style={{
+            color: 'rgba(255,255,255,0.55)',
+            fontWeight: 300,
+            fontSize: 'clamp(0.65rem, 1vw, 0.75rem)',
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}
         >
           {project.description}
         </p>
+        {isTruncated && (
+          <span
+            className="mt-1 cursor-pointer transition-colors duration-200 hover:!text-white"
+            style={{
+              color: 'rgba(255,255,255,0.35)',
+              fontSize: 'clamp(0.55rem, 0.9vw, 0.65rem)',
+              fontWeight: 400,
+              letterSpacing: '0.1em',
+            }}
+          >
+            Read more
+          </span>
+        )}
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 mt-3">
+        {/* Spacer pushes tags and links to the bottom */}
+        <div className="flex-1" />
+
+        {/* Tags — single row, overflow hidden */}
+        <div className="flex flex-nowrap gap-1.5 mt-3" style={{ overflow: 'hidden' }}>
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="text-[10px] px-2 py-0.5 rounded-full tracking-wider uppercase"
+              className="px-1.5 py-px rounded-full tracking-wider uppercase whitespace-nowrap"
               style={{
                 color: 'rgba(255,255,255,0.4)',
-                background: 'rgba(255,255,255,0.08)',
+                background: 'rgba(255,255,255,0.06)',
                 fontWeight: 400,
+                fontSize: 'clamp(0.45rem, 0.7vw, 0.55rem)',
+                lineHeight: 1.6,
               }}
             >
               {tag}
@@ -130,8 +168,8 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
               href={project.links.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-[11px] tracking-wider uppercase transition-colors duration-300 hover:!text-white"
-              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400 }}
+              className="flex items-center gap-1.5 tracking-wider uppercase transition-colors duration-300 hover:!text-white"
+              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.55rem, 0.9vw, 0.6875rem)' }}
             >
               <LinkIcon type="external" />
               Live
@@ -142,8 +180,8 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
               href={project.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-[11px] tracking-wider uppercase transition-colors duration-300 hover:!text-white"
-              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400 }}
+              className="flex items-center gap-1.5 tracking-wider uppercase transition-colors duration-300 hover:!text-white"
+              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.55rem, 0.9vw, 0.6875rem)' }}
             >
               <LinkIcon type="github" />
               Source

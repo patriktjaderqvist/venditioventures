@@ -16,7 +16,7 @@
     "title": "DLetter",
     "description": "AI-powered service that transforms thousands of Discord messages into clean, daily digest summaries delivered to your inbox each morning.",
     "image": "/dletter.png",
-    "tags": ["AI", "Discord", "Email Digests", "Automation"],
+    "tags": ["AI", "Discord", "Digests", "Automation"],
     "category": "ventures",
     "links": {
       "live": "https://dletter.app/",
@@ -27,7 +27,7 @@
     "id": "3",
     "title": "Liatch",
     "description": "Platform connecting companies, schools, and students for LIA internships. Making it easy to find the right placement, talent, and support — all in one place.",
-    "image": "",
+    "image": "/liatch.png",
     "tags": ["EdTech", "React", "Internships", "Fullstack"],
     "category": "academic",
     "links": {
@@ -40,7 +40,7 @@
     "title": "Nordic Wealth Network",
     "description": "Account Manager & Business Development — connecting companies with Nordic institutional investors, family offices, and long-term capital providers.",
     "image": "/nwn.png",
-    "tags": ["Sales", "Investor Relations", "Business Dev", "Nordic Capital"],
+    "tags": ["Sales", "IR", "BizDev", "Nordic"],
     "category": "consulting",
     "links": {
       "live": "https://nordicwealthnetwork.com/",

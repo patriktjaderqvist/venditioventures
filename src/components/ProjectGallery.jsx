@@ -37,8 +37,19 @@ function CVIcon() {
 
 /* ── Constants ──────────────────────────────────────────── */
 
-const BORDER = 40
+const BORDER_DESKTOP = 'clamp(20px, 3vw, 50px)'
+const BORDER_MOBILE = 10
 const TAB_HEIGHT = 38
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768)
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+  return isMobile
+}
 
 const TABS = [
   { id: 'story', label: 'The Story' },
@@ -125,10 +136,11 @@ function useProjects() {
 
 /* ── Folder Tab ─────────────────────────────────────────── */
 
-function FolderTab({ tab, isActive, onClick, index, total }) {
+function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
   // Same color for all tabs — matches the paper exactly
   const bg = 'var(--bg-elevated)'
-  const EAR = 8
+  const EAR = isMobile ? 5 : 8
+  const isLast = index === total - 1
 
   return (
     <div
@@ -138,7 +150,7 @@ function FolderTab({ tab, isActive, onClick, index, total }) {
         // Active tab always jumps to the very front
         zIndex: isActive ? 20 : (total - index),
         transform: isActive ? 'translateY(1px)' : 'translateY(10px)',
-        marginRight: `-${EAR * 2 + 6}px`,
+        marginRight: isLast ? 0 : `-${EAR * 2 + 6}px`,
         filter: 'none',
       }}
     >
@@ -155,18 +167,20 @@ function FolderTab({ tab, isActive, onClick, index, total }) {
         }} />
       </div>
 
-      {/* Right ear — inverse radius curve */}
-      <div
-        className="absolute bottom-0 right-0"
-        style={{ width: EAR, height: EAR, background: 'transparent', overflow: 'hidden' }}
-      >
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0,
-          width: EAR * 2, height: EAR * 2,
-          borderRadius: `0 0 0 ${EAR}px`,
-          boxShadow: `-${EAR / 2}px ${EAR / 2}px 0 ${EAR / 2}px ${bg}`,
-        }} />
-      </div>
+      {/* Right ear — inverse radius curve (not on last tab) */}
+      {!isLast && (
+        <div
+          className="absolute bottom-0 right-0"
+          style={{ width: EAR, height: EAR, background: 'transparent', overflow: 'hidden' }}
+        >
+          <div style={{
+            position: 'absolute', bottom: 0, left: 0,
+            width: EAR * 2, height: EAR * 2,
+            borderRadius: `0 0 0 ${EAR}px`,
+            boxShadow: `-${EAR / 2}px ${EAR / 2}px 0 ${EAR / 2}px ${bg}`,
+          }} />
+        </div>
+      )}
 
       {/* Main tab body */}
       <button
@@ -174,20 +188,23 @@ function FolderTab({ tab, isActive, onClick, index, total }) {
         className="relative cursor-pointer transition-all duration-300"
         style={{
           height: TAB_HEIGHT + 6,
-          padding: '0 22px',
+          padding: isMobile ? '0 8px' : '0 clamp(12px, 1.5vw, 22px)',
           margin: `0 ${EAR}px`,
-          fontSize: '9.5px',
+          marginRight: isLast ? 0 : `${EAR}px`,
+          fontSize: isMobile ? '7px' : 'clamp(7.5px, 0.75vw, 9.5px)',
           letterSpacing: '0.14em',
           textTransform: 'uppercase',
           fontFamily: 'var(--font-body)',
           fontWeight: isActive ? 400 : 300,
           color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.5)',
           background: bg,
-          borderRadius: '10px 10px 0 0',
+          borderRadius: '6px 6px 0 0',
           border: 'none',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          whiteSpace: 'nowrap',
+          flexShrink: 0,
         }}
         onMouseEnter={(e) => {
           if (!isActive) e.currentTarget.style.color = 'rgba(255,255,255,0.7)'
@@ -199,6 +216,24 @@ function FolderTab({ tab, isActive, onClick, index, total }) {
         {tab.label}
       </button>
 
+      {/* Folder edge — angled right side on last tab, matching 3D folder tab */}
+      {isLast && (
+        <svg
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            height: '100%',
+            width: isMobile ? 14 : 20,
+          }}
+          viewBox="0 0 20 44"
+          preserveAspectRatio="none"
+          fill="var(--bg-elevated)"
+        >
+          <path d="M0,0 L0,44 L20,44 L20,20 Q20,17 18,15 L4,2 Q2,0 0,0 Z" />
+        </svg>
+      )}
+
       {/* Depth gradient — darker toward bottom-left, more intense for tabs further back */}
       {!isActive && (
         <div
@@ -206,7 +241,7 @@ function FolderTab({ tab, isActive, onClick, index, total }) {
           style={{
             left: EAR, right: EAR,
             height: '100%',
-            borderRadius: '10px 10px 0 0',
+            borderRadius: '6px 6px 0 0',
             background: `linear-gradient(to top right,
               rgba(0,0,0,${0.15 + index * 0.1}) 0%,
               rgba(0,0,0,${0.06 + index * 0.04}) 50%,
@@ -270,7 +305,7 @@ function CloseTab({ onClick }) {
           fontWeight: 300,
           color: 'rgba(255,255,255,0.5)',
           background: bg,
-          borderRadius: '10px 10px 0 0',
+          borderRadius: '6px 6px 0 0',
           border: 'none',
           display: 'flex',
           alignItems: 'center',
@@ -296,7 +331,7 @@ function CloseTab({ onClick }) {
         style={{
           left: EAR, right: EAR,
           height: '100%',
-          borderRadius: '10px 10px 0 0',
+          borderRadius: '6px 6px 0 0',
           background: `linear-gradient(to top right,
             rgba(0,0,0,0.35) 0%,
             rgba(0,0,0,0.12) 50%,
@@ -313,7 +348,7 @@ function StoryContent() {
   const sectionStyle = {
     color: 'var(--text-secondary)',
     fontFamily: 'var(--font-body)',
-    fontSize: '0.9rem',
+    fontSize: 'clamp(0.8rem, 1.2vw, 0.95rem)',
     lineHeight: 1.8,
     fontWeight: 300,
   }
@@ -479,7 +514,7 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd }) {
   const filtered = projects.filter((p) => p.category === category)
 
   return (
-    <div className="max-w-6xl mx-auto px-8 pt-12 pb-12">
+    <div className="max-w-6xl mx-auto pt-12 pb-12" style={{ padding: 'clamp(24px, 3vw, 48px)' }}>
 
       {/* Logo + subtitle header */}
       <div className="w-full text-center mb-10">
@@ -497,7 +532,7 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd }) {
           {CATEGORY_SUBTITLES[category]}
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: 'clamp(12px, 1.5vw, 20px)' }}>
         {filtered.map((project, index) => (
           <ProjectCard
             key={project.id}
@@ -559,7 +594,7 @@ function ConnectContent() {
     borderRadius: '8px',
     padding: '12px 16px',
     color: 'var(--text-primary)',
-    fontSize: '0.85rem',
+    fontSize: 'clamp(0.75rem, 1.1vw, 0.875rem)',
     fontFamily: 'var(--font-body)',
     outline: 'none',
     width: '100%',
@@ -718,11 +753,13 @@ function ConnectContent() {
 
 export default function ProjectGallery({ onClose }) {
   const isAdmin = useIsAdmin()
+  const isMobile = useIsMobile()
   const { projects, addProject, removeProject } = useProjects()
   const [showAddModal, setShowAddModal] = useState(false)
   const [activeTab, setActiveTab] = useState('story')
   const [direction, setDirection] = useState(0)
   const [addCategory, setAddCategory] = useState('ventures')
+  const BORDER = isMobile ? BORDER_MOBILE : BORDER_DESKTOP
 
   const handleTabChange = (tabId) => {
     const currentIndex = TABS.findIndex((t) => t.id === activeTab)
@@ -818,7 +855,7 @@ export default function ProjectGallery({ onClose }) {
       />
 
       {/* Content area with padding */}
-      <div style={{ padding: `${BORDER}px ${BORDER}px ${BORDER}px` }}>
+      <div style={{ padding: isMobile ? `${BORDER}px` : `${BORDER} ${BORDER} ${BORDER}`, paddingTop: isMobile ? `${BORDER + 12}px` : `calc(${BORDER} + 12px)` }}>
 
         {/* Tabs row — inactive tabs peek from behind the paper */}
         <div
@@ -829,7 +866,17 @@ export default function ProjectGallery({ onClose }) {
           }}
         >
           {/* Left: navigation tabs */}
-          <div className="flex items-end" style={{ paddingLeft: '24px' }}>
+          <div
+            className="flex items-end"
+            style={{
+              paddingLeft: isMobile ? '4px' : '24px',
+              overflowX: isMobile ? 'auto' : 'visible',
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              width: '100%',
+            }}
+          >
             {TABS.map((tab, i) => (
               <FolderTab
                 key={tab.id}
@@ -838,6 +885,7 @@ export default function ProjectGallery({ onClose }) {
                 total={TABS.length}
                 isActive={activeTab === tab.id}
                 onClick={() => handleTabChange(tab.id)}
+                isMobile={isMobile}
               />
             ))}
           </div>
@@ -851,8 +899,9 @@ export default function ProjectGallery({ onClose }) {
             background: 'var(--bg-elevated)',
             borderRadius: '16px',
             boxShadow: `
-              4px 4px 30px rgba(0,0,0,0.25),
-              0 8px 60px rgba(0,0,0,0.15)
+              0 12px 50px rgba(0,0,0,0.4),
+              0 25px 80px rgba(0,0,0,0.3),
+              0 4px 20px rgba(0,0,0,0.2)
             `,
             minHeight: '120vh',
             position: 'relative',

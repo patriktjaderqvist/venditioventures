@@ -101,3 +101,15 @@
   user-select: none;
 }
 
+/* Mobile: make folder vertical (portrait orientation) */
+@media (max-width: 768px) {
+  .folder-body {
+    width: 55vmin;
+    height: calc(55vmin * 1.414);
+  }
+
+  .folder-perspective {
+    perspective: 800px;
+  }
+}
+
