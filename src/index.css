@@ -58,3 +58,63 @@ html {
 ::selection {
   background: rgba(0, 0, 0, 0.1);
 }
+
+/* Curved page shadow — corners peek out from all edges */
+.paper-shadow .shadow-top-left,
+.paper-shadow .shadow-top-right,
+.paper-shadow .shadow-bottom-left,
+.paper-shadow .shadow-bottom-right,
+.paper-shadow .shadow-left-top,
+.paper-shadow .shadow-left-bottom,
+.paper-shadow .shadow-right-top,
+.paper-shadow .shadow-right-bottom {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+  z-index: -1;
+}
+/* Bottom edge — shadow peeks left and right, stops before corners */
+.paper-shadow .shadow-bottom-left {
+  bottom: -6px; left: 1%;
+  width: 45%; height: 28px;
+  filter: blur(5px);
+  transform: rotate(-1.5deg);
+}
+.paper-shadow .shadow-bottom-right {
+  bottom: -6px; right: 1%;
+  width: 45%; height: 28px;
+  filter: blur(5px);
+  transform: rotate(1.5deg);
+}
+/* Top edge — disabled, tabs connect here */
+.paper-shadow .shadow-top-left,
+.paper-shadow .shadow-top-right {
+  display: none;
+}
+/* Left edge — shadow peeks top and bottom, stops before corners */
+.paper-shadow .shadow-left-top {
+  left: -6px; top: 1%;
+  height: 45%; width: 28px;
+  filter: blur(5px);
+  transform: rotate(-1.5deg);
+}
+.paper-shadow .shadow-left-bottom {
+  left: -6px; bottom: 1%;
+  height: 45%; width: 28px;
+  filter: blur(5px);
+  transform: rotate(1.5deg);
+}
+/* Right edge — shadow peeks top and bottom, stops before corners */
+.paper-shadow .shadow-right-top {
+  right: -6px; top: 1%;
+  height: 45%; width: 28px;
+  filter: blur(5px);
+  transform: rotate(1.5deg);
+}
+.paper-shadow .shadow-right-bottom {
+  right: -6px; bottom: 1%;
+  height: 45%; width: 28px;
+  filter: blur(5px);
+  transform: rotate(-1.5deg);
+}

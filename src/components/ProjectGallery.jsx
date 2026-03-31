@@ -157,6 +157,7 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
   return (
     <div
       className="relative"
+      onClick={(e) => e.stopPropagation()}
       style={{
         zIndex: isActive ? 20 : (total - index),
         transform: isActive ? 'translateY(4px)' : 'translateY(10px)',
@@ -368,7 +369,24 @@ function StoryContent() {
   }
 
   return (
-    <div>
+    <div className="relative">
+      {/* VV monogram watermark — only on The Story */}
+      <div
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        style={{ zIndex: 0 }}
+      >
+        <img
+          src={vvLogoSrc}
+          alt=""
+          style={{
+            width: 'clamp(250px, 35vw, 500px)',
+            opacity: 0.03,
+            filter: 'invert(1)',
+            userSelect: 'none',
+          }}
+        />
+      </div>
+
       {/* Header */}
       <div className="max-w-3xl mx-auto px-8 pt-12 pb-4">
         <div className="w-full text-center">
@@ -397,7 +415,7 @@ function StoryContent() {
               letterSpacing: '0.03em',
             }}
           >
-            Building what you didn't know you needed.
+            Consulting &middot; Ventures &middot; Products
           </p>
         </div>
       </div>
@@ -410,7 +428,7 @@ function StoryContent() {
           <h2 style={headingStyle}>Venditio</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            From the Latin <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>venditio</em> — the act of selling, the art of the salesperson. Not selling as in pushing product, but selling as in understanding people, reading rooms, and knowing what makes someone say yes. It is the foundation everything here is built on.
+            From the Latin <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>venditio</em> — the act of selling, the art of the deal. Not the kind that pushes product. The kind that reads a room, understands what drives a person, and knows exactly when to speak and when to listen. It is the instinct behind everything built here.
           </p>
         </section>
 
@@ -434,43 +452,34 @@ function StoryContent() {
 
         {/* The Person */}
         <section>
-          <h2 style={headingStyle}>The Person Behind the Brand</h2>
+          <h2 style={headingStyle}>Patrik Tj&auml;derqvist</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            Venditio is <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Patrik Tj&auml;derqvist</em>. The brand lives through the person — every project, every client engagement, every product carries the same mindset and standard. There is no separation between the two. Where Patrik goes, Venditio follows.
+            Venditio is one person. Every venture, every client engagement, every product carries the same mind and the same standard. There is no team page because there is no distance between the brand and the person behind it.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            Born in 1999, right at the edge. Old enough to understand the millennial world — the internet before algorithms, the patience of dial-up, the shift from analog to digital. Young enough to carry the drive, urgency, and native digital fluency that defines Gen Z. This intersection is not a footnote. It shapes how problems are approached, how products are designed, and how people are understood.
+            The foundation is sales — years of cold calls, objections, and closing taught things no classroom can. How to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em> past what people say to what they actually need. That gap is where real value lives, and it is the lens through which every problem gets solved.
           </p>
         </section>
 
-        {/* The Foundation */}
+        {/* The Approach */}
         <section>
-          <h2 style={headingStyle}>Built on Sales</h2>
+          <h2 style={headingStyle}>The Approach</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            The career began in sales. Cold calls, objections, closing. That world teaches things no classroom can — how to think on your feet, how to keep moving when the answer is no, and above all, how to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em>. Not to what people say they need, but to what they <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>actually</em> need. The gap between those two things is where real value lives. Sales built the entrepreneurial mindset, the logical problem-solving, and the social expertise that now drives everything Venditio does.
-          </p>
-        </section>
-
-        {/* What Venditio Does */}
-        <section>
-          <h2 style={headingStyle}>What We Do</h2>
-          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          <p style={sectionStyle}>
-            Venditio excels at finding what can be <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>better</em>. Products that could work smarter. Workflows that waste time. Processes that exist because "that's how it's always been done." The same instinct that reads a client across the table is the one that reads a broken workflow — people rarely know exactly what's wrong, but they know something is. We step in, see what they can't articulate, break it down, and <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>rebuild it</em>.
+            Most problems hide in plain sight. A workflow everyone tolerates. A product that almost works. A process that exists because nobody questioned it. Venditio steps in where others see normal and finds what can be <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>better</em> — then builds the solution.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            But Venditio also builds its own. Products are created under their own brands, each with their own identity, but all under the Venditio Ventures AB umbrella. The ventures are not side projects — they are the main event.
+            Consulting and product development under one roof. Client work is informed by the discipline of building real products. Own ventures are shaped by the clarity that comes from solving other people's problems first. The two sharpen each other.
           </p>
         </section>
 
-        {/* The Portfolio */}
+        {/* The Work */}
         <section>
-          <h2 style={headingStyle}>This Portfolio</h2>
+          <h2 style={headingStyle}>Explore</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            This is where it all comes together. Our own products and ventures. Work done for other companies. Projects from the academic years that shaped the thinking. Everything lives here — not sorted by importance, but by what it is. Open the tabs, look around. This is what Venditio has built, is building, and will build.
+            Own ventures. Client work. Academic projects that shaped the thinking. Open the tabs above — everything is here, organized by what it is, not by what came first.
           </p>
         </section>
 
@@ -508,10 +517,19 @@ function StoryContent() {
   )
 }
 
-const CATEGORY_SUBTITLES = {
-  ventures: 'What We\'re Currently Building',
-  consulting: 'How We Helped Others Excel',
-  academic: 'Where the Foundation Was Laid',
+const CATEGORY_INTROS = {
+  ventures: {
+    title: 'Our Ventures',
+    description: 'Products built from the ground up — each with its own brand, its own audience, all under the Venditio umbrella.',
+  },
+  consulting: {
+    title: 'Consulting',
+    description: 'Work done for clients who needed a sharper eye on their product, process, or strategy.',
+  },
+  academic: {
+    title: 'Academic',
+    description: 'The projects that built the foundation — where theory met practice for the first time.',
+  },
 }
 
 function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd }) {
@@ -520,20 +538,32 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd }) {
   return (
     <div className="max-w-6xl mx-auto pt-12 pb-12" style={{ padding: 'clamp(24px, 3vw, 48px)' }}>
 
-      {/* Logo + subtitle header */}
+      {/* Tab intro */}
       <div className="w-full text-center mb-10">
-        <img
-          src={vvLogoSrc}
-          alt="Venditio Ventures"
-          className="mx-auto mb-4"
-          style={{ width: 'clamp(40px, 5vw, 60px)', opacity: 0.85, filter: 'invert(1)' }}
-        />
-        <div className="mx-auto h-px w-12" style={{ background: 'rgba(255,255,255,0.08)' }} />
-        <p
-          className="mt-3 text-xs tracking-[0.2em] uppercase"
-          style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
+        <h2
+          className="tracking-[0.2em] uppercase"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)',
+            fontWeight: 300,
+            color: 'var(--text-primary)',
+            lineHeight: 1.2,
+          }}
         >
-          {CATEGORY_SUBTITLES[category]}
+          {CATEGORY_INTROS[category]?.title}
+        </h2>
+        <div className="mt-3 mx-auto h-px w-12" style={{ background: 'rgba(255,255,255,0.08)' }} />
+        <p
+          className="mt-4 mx-auto"
+          style={{
+            color: 'var(--text-secondary)',
+            fontSize: 'clamp(0.75rem, 1.1vw, 0.88rem)',
+            fontWeight: 300,
+            lineHeight: 1.7,
+            maxWidth: '480px',
+          }}
+        >
+          {CATEGORY_INTROS[category]?.description}
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: 'clamp(12px, 1.5vw, 20px)' }}>
@@ -616,18 +646,30 @@ function ConnectContent() {
     >
       {/* Header */}
       <div className="text-center mb-10">
-        <img
-          src={vvLogoSrc}
-          alt="Venditio Ventures"
-          className="mx-auto mb-4"
-          style={{ width: 'clamp(40px, 5vw, 60px)', opacity: 0.85, filter: 'invert(1)' }}
-        />
-        <div className="mx-auto h-px w-12" style={{ background: 'rgba(255,255,255,0.08)' }} />
-        <p
-          className="mt-3 text-xs tracking-[0.2em] uppercase"
-          style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
+        <h2
+          className="tracking-[0.2em] uppercase"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)',
+            fontWeight: 300,
+            color: 'var(--text-primary)',
+            lineHeight: 1.2,
+          }}
         >
-          Get in Touch
+          Connect
+        </h2>
+        <div className="mt-3 mx-auto h-px w-12" style={{ background: 'rgba(255,255,255,0.08)' }} />
+        <p
+          className="mt-4 mx-auto"
+          style={{
+            color: 'var(--text-secondary)',
+            fontSize: 'clamp(0.75rem, 1.1vw, 0.88rem)',
+            fontWeight: 300,
+            lineHeight: 1.7,
+            maxWidth: '480px',
+          }}
+        >
+          Interested in working together, have a question, or just want to say hello? Reach out.
         </p>
       </div>
 
@@ -743,10 +785,19 @@ function ConnectContent() {
       </div>
 
       {/* Footer */}
-      <div className="text-center mt-16">
-        <div className="mx-auto h-px w-full mb-6" style={{ background: 'rgba(255,255,255,0.05)' }} />
+      <div className="text-center mt-16 pb-12">
+        <div className="mx-auto h-px w-full mb-10" style={{ background: 'rgba(255,255,255,0.05)' }} />
+        <img
+          src={vvLogoSrc}
+          alt="VV"
+          className="mx-auto mb-5"
+          style={{ width: '32px', opacity: 0.25, filter: 'invert(1)' }}
+        />
         <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.1em', fontWeight: 300 }}>
           Venditio Ventures AB
+        </p>
+        <p className="mt-2" style={{ color: 'rgba(255,255,255,0.1)', fontSize: '0.6rem', letterSpacing: '0.08em', fontWeight: 300 }}>
+          &copy; {new Date().getFullYear()}
         </p>
       </div>
     </div>
@@ -846,23 +897,30 @@ export default function ProjectGallery({ onClose }) {
       className="w-full"
       style={{ background: 'var(--bg)' }}
     >
-      {/* Clickable side borders to close */}
+      {/* Entire white area closes the folder */}
       <div
         onClick={onClose}
-        className="fixed left-0 top-0 bottom-0 z-40 cursor-pointer"
-        style={{ width: BORDER }}
-      />
-      <div
-        onClick={onClose}
-        className="fixed right-0 top-0 bottom-0 z-40 cursor-pointer"
-        style={{ width: BORDER }}
-      />
+        className="cursor-pointer"
+        style={{ padding: isMobile ? `${BORDER}px` : `${BORDER} ${BORDER} ${BORDER}`, paddingTop: isMobile ? `${BORDER + 12}px` : `calc(${BORDER} + 12px)`, paddingBottom: isMobile ? '60px' : 'clamp(60px, 8vw, 120px)', minHeight: '100vh' }}
+      >
 
-      {/* Content area with padding */}
-      <div style={{ padding: isMobile ? `${BORDER}px` : `${BORDER} ${BORDER} ${BORDER}`, paddingTop: isMobile ? `${BORDER + 12}px` : `calc(${BORDER} + 12px)` }}>
+        {/* VV stamp on white area */}
+        <div className="flex justify-center" style={{ marginBottom: '-20px', marginTop: '-40px', pointerEvents: 'none' }}>
+          <img
+            src={vvLogoSrc}
+            alt=""
+            style={{
+              width: 'clamp(100px, 15vw, 180px)',
+              opacity: 0.1,
+              userSelect: 'none',
+              filter: 'drop-shadow(1px 2px 1px rgba(0,0,0,0.15)) drop-shadow(-1px -1px 0px rgba(255,255,255,0.7))',
+            }}
+          />
+        </div>
 
         {/* Tabs row — inactive tabs peek from behind the paper */}
         <div
+          onClick={(e) => e.stopPropagation()}
           className="flex items-end justify-between"
           style={{
             marginBottom: '-1px',
@@ -896,20 +954,27 @@ export default function ProjectGallery({ onClose }) {
 
         </div>
 
-        {/* Dark content box — "the paper" — sits ON TOP of inactive tabs */}
+        {/* Shadow wrapper — no overflow hidden so shadows peek out */}
+        <div className="paper-shadow" style={{ position: 'relative', zIndex: 5 }}>
+          <div className="shadow-bottom-left" />
+          <div className="shadow-bottom-right" />
+          <div className="shadow-top-left" />
+          <div className="shadow-top-right" />
+          <div className="shadow-left-top" />
+          <div className="shadow-left-bottom" />
+          <div className="shadow-right-top" />
+          <div className="shadow-right-bottom" />
+
+        {/* Dark content box — "the paper" */}
         <div
+          onClick={(e) => e.stopPropagation()}
           className="relative"
           style={{
             background: 'var(--bg-elevated)',
             borderRadius: '16px',
-            boxShadow: `
-              0 4px 14px rgba(0,0,0,0.5),
-              0 10px 28px rgba(0,0,0,0.4),
-              0 2px 6px rgba(0,0,0,0.3)
-            `,
-            minHeight: '120vh',
+            minHeight: '200vh',
             position: 'relative',
-            zIndex: 5,
+            zIndex: 1,
             overflow: 'hidden',
           }}
         >
@@ -936,6 +1001,8 @@ export default function ProjectGallery({ onClose }) {
             {renderTabContent()}
           </AnimatePresence>
         </div>
+        </div>{/* close paper-shadow wrapper */}
+
       </div>
 
       {/* Add Project Modal */}
