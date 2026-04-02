@@ -428,7 +428,7 @@ function StoryContent() {
           <h2 style={headingStyle}>Venditio</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            From the Latin <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>venditio</em> — the act of selling, the art of the deal. Not the kind that pushes product. The kind that reads a room, understands what drives a person, and knows exactly when to speak and when to listen. It is the instinct behind everything built here.
+            From the Latin <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>venditio</em>, the act of selling, the art of the deal. Not the kind that pushes product. The kind that reads a room, understands what drives a person, and knows when to speak and when to listen. That instinct is behind everything built here.
           </p>
         </section>
 
@@ -444,7 +444,7 @@ function StoryContent() {
             />
             <div>
               <p style={sectionStyle}>
-                Two V's — Venditio Ventures. The double V carries the initials, but it also reads as a W. That was never an accident. The W carries the intent. <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Win</em>. Every project ships with the same goal: <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>come out on top</em>. For the client, for the user, for the product. The mark is a reminder that the work isn't done until someone wins.
+                Two V's. Venditio Ventures. The double V carries the initials, but it also reads as a W. That was never an accident. The W carries the intent. <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Win</em>. Every project ships with the same goal: <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>come out on top</em>. For the client, for the user, for the product. The mark is a reminder that the work isn't done until someone wins.
               </p>
             </div>
           </div>
@@ -458,7 +458,19 @@ function StoryContent() {
             Venditio is one person. Every venture, every client engagement, every product carries the same mind and the same standard. There is no team page because there is no distance between the brand and the person behind it.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            The foundation is sales — years of cold calls, objections, and closing taught things no classroom can. How to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em> past what people say to what they actually need. That gap is where real value lives, and it is the lens through which every problem gets solved.
+            Several years in sales and account management at 3 Sverige. Customer service, B2B relationships, 120+ corporate accounts, and building a win-back department from scratch. First person from customer service nominated for <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Salesperson of the Year</em> in over five years. That world teaches you how to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em> past what people say to what they actually need.
+          </p>
+        </section>
+
+        {/* The Evolution */}
+        <section>
+          <h2 style={headingStyle}>The Evolution</h2>
+          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <p style={sectionStyle}>
+            The same drive that built a sales career now goes into building things. Python development with an AI specialization at Nackademin. Private investing across stocks, crypto, and NFTs. And Venditio Ventures AB, the vehicle where it all comes together. Idea, analysis, prototype, product.
+          </p>
+          <p className="mt-4" style={sectionStyle}>
+            Driven by growth and by building systems that create <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>real value</em>. Analytical, research-driven, always looking for where technology meets business.
           </p>
         </section>
 
@@ -467,19 +479,19 @@ function StoryContent() {
           <h2 style={headingStyle}>The Approach</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            Most problems hide in plain sight. A workflow everyone tolerates. A product that almost works. A process that exists because nobody questioned it. Venditio steps in where others see normal and finds what can be <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>better</em> — then builds the solution.
+            Most problems hide in plain sight. A workflow everyone tolerates. A product that almost works. A process that exists because nobody questioned it. Venditio steps in where others see normal, finds what can be <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>better</em>, and builds the fix.
           </p>
           <p className="mt-4" style={sectionStyle}>
             Consulting and product development under one roof. Client work is informed by the discipline of building real products. Own ventures are shaped by the clarity that comes from solving other people's problems first. The two sharpen each other.
           </p>
         </section>
 
-        {/* The Work */}
+        {/* Open to connect */}
         <section>
-          <h2 style={headingStyle}>Explore</h2>
+          <h2 style={headingStyle}>Let's Build Something</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            Own ventures. Client work. Academic projects that shaped the thinking. Open the tabs above — everything is here, organized by what it is, not by what came first.
+            Open to connecting and collaborating around software development, trading, fintech, and projects where technology meets business. Explore the tabs above, or reach out directly.
           </p>
         </section>
 
@@ -520,7 +532,7 @@ function StoryContent() {
 const CATEGORY_INTROS = {
   ventures: {
     title: 'Our Ventures',
-    description: 'Products built from the ground up — each with its own brand, its own audience, all under the Venditio umbrella.',
+    description: 'Products built from the ground up. Each with its own brand, its own audience, all under the Venditio umbrella.',
   },
   consulting: {
     title: 'Consulting',
@@ -528,7 +540,7 @@ const CATEGORY_INTROS = {
   },
   academic: {
     title: 'Academic',
-    description: 'The projects that built the foundation — where theory met practice for the first time.',
+    description: 'The projects that built the foundation. Where theory met practice for the first time.',
   },
 }
 
