@@ -87,13 +87,61 @@ function SocialLink({ href, children }) {
   )
 }
 
+// Admin auth: triple-click the close button area or press Ctrl+Shift+K to open login
+// Session stored in sessionStorage (cleared on tab close)
+// Passphrase is hashed and compared against env var
+const ADMIN_HASH = import.meta.env.VITE_ADMIN_HASH || ''
+
+async function hashPassphrase(passphrase) {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(passphrase)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
 function useIsAdmin() {
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(() => {
+    return sessionStorage.getItem('vv_admin') === 'true'
+  })
+  const [showLogin, setShowLogin] = useState(false)
+
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    setIsAdmin(params.get('admin') === 'true')
-  }, [])
-  return isAdmin
+    // Ctrl+Shift+K to toggle admin login prompt
+    const handler = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'K') {
+        e.preventDefault()
+        if (isAdmin) {
+          // Logout
+          sessionStorage.removeItem('vv_admin')
+          setIsAdmin(false)
+        } else {
+          setShowLogin(true)
+        }
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [isAdmin])
+
+  const tryLogin = async (passphrase) => {
+    if (!ADMIN_HASH) {
+      setShowLogin(false)
+      return false
+    }
+    const hash = await hashPassphrase(passphrase)
+    if (hash === ADMIN_HASH) {
+      sessionStorage.setItem('vv_admin', 'true')
+      setIsAdmin(true)
+      setShowLogin(false)
+      return true
+    }
+    return false
+  }
+
+  const closeLogin = () => setShowLogin(false)
+
+  return { isAdmin, showLogin, tryLogin, closeLogin }
 }
 
 function useProjects() {
@@ -816,10 +864,85 @@ function ConnectContent() {
   )
 }
 
+/* ── Admin Login Modal ──────────────────────────────────── */
+
+function AdminLoginModal({ onClose, onLogin }) {
+  const [pass, setPass] = useState('')
+  const [error, setError] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const success = await onLogin(pass)
+    if (!success) {
+      setError(true)
+      setPass('')
+      setTimeout(() => setError(false), 2000)
+    }
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.15 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center"
+      style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)' }}
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.2 }}
+        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-xs rounded-xl p-6"
+        style={{
+          background: '#1a1a1e',
+          border: '1px solid rgba(255,255,255,0.08)',
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+          <input
+            type="password"
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            placeholder="Passphrase"
+            autoFocus
+            className="w-full mb-3"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: error ? '1px solid rgba(255,80,80,0.4)' : '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '6px',
+              padding: '10px 14px',
+              color: 'var(--text-primary)',
+              fontSize: '13px',
+              fontFamily: 'var(--font-body)',
+              outline: 'none',
+            }}
+          />
+          <button
+            type="submit"
+            className="w-full py-2 rounded-md text-[11px] tracking-[0.12em] uppercase cursor-pointer"
+            style={{
+              color: '#0a0a0a',
+              background: 'rgba(255,255,255,0.85)',
+              border: 'none',
+              fontWeight: 500,
+            }}
+          >
+            Enter
+          </button>
+        </form>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 /* ── Main Gallery ───────────────────────────────────────── */
 
 export default function ProjectGallery({ onClose }) {
-  const isAdmin = useIsAdmin()
+  const { isAdmin, showLogin, tryLogin, closeLogin } = useIsAdmin()
   const isMobile = useIsMobile()
   const { projects, addProject, removeProject } = useProjects()
   const [showAddModal, setShowAddModal] = useState(false)
@@ -1028,6 +1151,13 @@ export default function ProjectGallery({ onClose }) {
               setShowAddModal(false)
             }}
           />
+        )}
+      </AnimatePresence>
+
+      {/* Admin Login Modal */}
+      <AnimatePresence>
+        {showLogin && (
+          <AdminLoginModal onClose={closeLogin} onLogin={tryLogin} />
         )}
       </AnimatePresence>
     </motion.div>
