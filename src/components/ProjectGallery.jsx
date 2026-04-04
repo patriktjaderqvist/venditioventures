@@ -522,6 +522,30 @@ function StoryContent() {
           </p>
         </section>
 
+        {/* Toolbox */}
+        <section>
+          <h2 style={headingStyle}>Toolbox</h2>
+          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <div className="flex flex-wrap gap-2 mt-2">
+            {['Python', 'React', 'JavaScript', 'Node.js', 'AI / ML', 'PostgreSQL', 'Git', 'REST APIs', 'Tailwind CSS', 'Three.js', 'CRM Systems', 'B2B Sales', 'Business Development'].map((skill) => (
+              <span
+                key={skill}
+                className="px-3 py-1.5 rounded-full"
+                style={{
+                  color: 'rgba(255,255,255,0.55)',
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.06)',
+                  fontSize: 'clamp(0.65rem, 1vw, 0.75rem)',
+                  fontWeight: 300,
+                  letterSpacing: '0.05em',
+                }}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+
         {/* The Approach */}
         <section>
           <h2 style={headingStyle}>The Approach</h2>
@@ -534,13 +558,40 @@ function StoryContent() {
           </p>
         </section>
 
-        {/* Open to connect */}
-        <section>
-          <h2 style={headingStyle}>Let's Build Something</h2>
-          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          <p style={sectionStyle}>
-            Open to connecting and collaborating around software development, trading, fintech, and projects where technology meets business. Explore the tabs above, or reach out directly.
+        {/* CTA */}
+        <section className="text-center" style={{ paddingTop: '8px' }}>
+          <div className="mx-auto h-px w-12 mb-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <p style={{ ...sectionStyle, color: 'rgba(255,255,255,0.6)' }}>
+            Interested in working together?
           </p>
+          <div className="flex justify-center gap-3 mt-4 flex-wrap">
+            <a
+              href="https://www.linkedin.com/in/patriktjaderqvist/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 rounded-full text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+              style={{
+                color: 'rgba(255,255,255,0.85)',
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.1)',
+              }}
+            >
+              Reach out on LinkedIn
+            </a>
+            <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 rounded-full text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+              style={{
+                color: 'rgba(255,255,255,0.5)',
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.06)',
+              }}
+            >
+              Download CV
+            </a>
+          </div>
         </section>
 
       </div>
