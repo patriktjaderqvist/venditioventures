@@ -248,7 +248,7 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
         onClick={onClick}
         className="relative cursor-pointer transition-colors duration-300"
         style={{
-          height: TAB_HEIGHT + 6,
+          height: isMobile ? TAB_HEIGHT - 8 : TAB_HEIGHT + 6,
           paddingTop: 0,
           paddingBottom: 0,
           paddingLeft: isFirst
@@ -306,7 +306,7 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
   )
 }
 
-function CloseTab({ onClick }) {
+function CloseTab({ onClick, isMobile }) {
   const bg = 'var(--bg-elevated)'
   const EAR = 8
 
@@ -348,7 +348,7 @@ function CloseTab({ onClick }) {
         onClick={onClick}
         className="relative cursor-pointer transition-colors duration-300"
         style={{
-          height: TAB_HEIGHT + 6,
+          height: isMobile ? TAB_HEIGHT - 8 : TAB_HEIGHT + 6,
           padding: '0 18px',
           margin: `0 ${EAR}px`,
           fontSize: '9.5px',
@@ -1087,7 +1087,7 @@ export default function ProjectGallery({ onClose }) {
       <div
         onClick={onClose}
         className="cursor-pointer"
-        style={{ padding: isMobile ? `${BORDER}px` : `${BORDER} ${BORDER} ${BORDER}`, paddingTop: isMobile ? `${BORDER + 12}px` : `calc(${BORDER} + 12px)`, paddingBottom: isMobile ? '60px' : 'clamp(60px, 8vw, 120px)', minHeight: '100vh' }}
+        style={{ padding: isMobile ? `${BORDER}px` : `${BORDER} ${BORDER} ${BORDER}`, paddingTop: isMobile ? `${BORDER + 28}px` : `calc(${BORDER} + 12px)`, paddingBottom: isMobile ? '60px' : 'clamp(60px, 8vw, 120px)', minHeight: '100vh' }}
       >
 
         {/* VV stamp on white area */}
@@ -1117,7 +1117,7 @@ export default function ProjectGallery({ onClose }) {
           <div
             className="flex items-end"
             style={{
-              paddingLeft: isMobile ? '4px' : '24px',
+              paddingLeft: isMobile ? '14px' : '24px',
               overflowX: isMobile ? 'auto' : 'visible',
               WebkitOverflowScrolling: 'touch',
               scrollbarWidth: 'none',
