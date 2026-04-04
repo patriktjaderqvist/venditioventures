@@ -68,7 +68,7 @@ export default function AddProjectModal({ onClose, onAdd }) {
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-2xl p-8"
+        className="w-full max-w-md rounded-2xl p-5 sm:p-8 mx-3 sm:mx-0"
         style={{
           background: '#1a1a1e',
           border: '1px solid rgba(255,255,255,0.08)',
@@ -133,7 +133,7 @@ export default function AddProjectModal({ onClose, onAdd }) {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label style={labelStyle}>Live URL</label>
               <input

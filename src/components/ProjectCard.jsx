@@ -100,10 +100,10 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
       </div>
 
       {/* Content — fixed height with truncation */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className="p-4 sm:p-5 flex flex-col flex-1">
         <h3
           className="font-medium tracking-wide"
-          style={{ color: 'rgba(255,255,255,0.92)', fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)' }}
+          style={{ color: 'rgba(255,255,255,0.92)', fontSize: 'clamp(0.8rem, 1.2vw, 0.875rem)' }}
         >
           {project.title}
         </h3>
@@ -113,7 +113,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
           style={{
             color: 'rgba(255,255,255,0.55)',
             fontWeight: 300,
-            fontSize: 'clamp(0.65rem, 1vw, 0.75rem)',
+            fontSize: 'clamp(0.7rem, 1vw, 0.75rem)',
             display: '-webkit-box',
             WebkitLineClamp: 3,
             WebkitBoxOrient: 'vertical',
@@ -127,7 +127,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
             className="mt-1 cursor-pointer transition-colors duration-200 hover:!text-white"
             style={{
               color: 'rgba(255,255,255,0.35)',
-              fontSize: 'clamp(0.55rem, 0.9vw, 0.65rem)',
+              fontSize: 'clamp(0.65rem, 0.9vw, 0.65rem)',
               fontWeight: 400,
               letterSpacing: '0.1em',
             }}
@@ -149,7 +149,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
                 color: 'rgba(255,255,255,0.4)',
                 background: 'rgba(255,255,255,0.06)',
                 fontWeight: 400,
-                fontSize: 'clamp(0.45rem, 0.7vw, 0.55rem)',
+                fontSize: 'clamp(0.55rem, 0.7vw, 0.55rem)',
                 lineHeight: 1.6,
               }}
             >
@@ -169,7 +169,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 tracking-wider uppercase transition-colors duration-300 hover:!text-white"
-              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.55rem, 0.9vw, 0.6875rem)' }}
+              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.65rem, 0.9vw, 0.6875rem)' }}
             >
               <LinkIcon type="external" />
               Live
@@ -181,7 +181,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 tracking-wider uppercase transition-colors duration-300 hover:!text-white"
-              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.55rem, 0.9vw, 0.6875rem)' }}
+              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.65rem, 0.9vw, 0.6875rem)' }}
             >
               <LinkIcon type="github" />
               Source

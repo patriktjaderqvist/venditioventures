@@ -401,14 +401,14 @@ function StoryContent() {
   const sectionStyle = {
     color: 'var(--text-secondary)',
     fontFamily: 'var(--font-body)',
-    fontSize: 'clamp(0.8rem, 1.2vw, 0.95rem)',
+    fontSize: 'clamp(0.82rem, 1.2vw, 0.95rem)',
     lineHeight: 1.8,
     fontWeight: 300,
   }
 
   const headingStyle = {
     fontFamily: 'var(--font-display)',
-    fontSize: 'clamp(1rem, 2vw, 1.4rem)',
+    fontSize: 'clamp(1.1rem, 2vw, 1.4rem)',
     fontWeight: 300,
     color: 'var(--text-primary)',
     letterSpacing: '0.15em',
@@ -436,7 +436,7 @@ function StoryContent() {
       </div>
 
       {/* Header */}
-      <div className="max-w-3xl mx-auto px-8 pt-12 pb-4">
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 pt-8 sm:pt-12 pb-4">
         <div className="w-full text-center">
           <h1
             className="tracking-[0.25em] uppercase"
@@ -469,7 +469,7 @@ function StoryContent() {
       </div>
 
       {/* Story content */}
-      <div className="max-w-3xl mx-auto px-8 py-8 space-y-12">
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 py-6 sm:py-8 space-y-10 sm:space-y-12">
 
         {/* The Name */}
         <section>
@@ -546,12 +546,12 @@ function StoryContent() {
       </div>
 
       {/* Divider */}
-      <div className="max-w-3xl mx-auto px-8">
+      <div className="max-w-3xl mx-auto px-5 sm:px-8">
         <div className="h-px w-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
       </div>
 
       {/* Connect section */}
-      <div className="max-w-3xl mx-auto px-8 py-12">
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 py-12">
         <p
           className="text-center text-xs tracking-[0.2em] uppercase mb-6"
           style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
@@ -617,7 +617,7 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd }) {
           className="mt-4 mx-auto"
           style={{
             color: 'var(--text-secondary)',
-            fontSize: 'clamp(0.75rem, 1.1vw, 0.88rem)',
+            fontSize: 'clamp(0.8rem, 1.1vw, 0.88rem)',
             fontWeight: 300,
             lineHeight: 1.7,
             maxWidth: '480px',
@@ -626,7 +626,7 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd }) {
           {CATEGORY_INTROS[category]?.description}
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: 'clamp(12px, 1.5vw, 20px)' }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: 'clamp(16px, 1.5vw, 20px)' }}>
         {filtered.map((project, index) => (
           <ProjectCard
             key={project.id}
@@ -688,7 +688,7 @@ function ConnectContent() {
     borderRadius: '8px',
     padding: '12px 16px',
     color: 'var(--text-primary)',
-    fontSize: 'clamp(0.75rem, 1.1vw, 0.875rem)',
+    fontSize: 'clamp(0.85rem, 1.1vw, 0.875rem)',
     fontFamily: 'var(--font-body)',
     outline: 'none',
     width: '100%',
@@ -702,7 +702,7 @@ function ConnectContent() {
 
   return (
     <div
-      className="max-w-3xl mx-auto px-8 py-16"
+      className="max-w-3xl mx-auto px-5 sm:px-8 py-10 sm:py-16"
     >
       {/* Header */}
       <div className="text-center mb-10">
@@ -723,7 +723,7 @@ function ConnectContent() {
           className="mt-4 mx-auto"
           style={{
             color: 'var(--text-secondary)',
-            fontSize: 'clamp(0.75rem, 1.1vw, 0.88rem)',
+            fontSize: 'clamp(0.8rem, 1.1vw, 0.88rem)',
             fontWeight: 300,
             lineHeight: 1.7,
             maxWidth: '480px',
