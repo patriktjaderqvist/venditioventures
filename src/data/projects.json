@@ -71,21 +71,21 @@
   {
     "id": "4",
     "title": "Nordic Wealth Network",
-    "description": "Account Manager & Business Development — connecting companies with Nordic institutional investors, family offices, and long-term capital providers.",
+    "description": "Running account management and business development. Building institutional investor relationships across the Nordics and opening doors for growth-stage companies.",
     "image": "/nwn.png",
     "tags": ["Sales", "IR", "BizDev", "Nordic"],
     "category": "consulting",
     "role": "Account Manager & Business Development",
     "year": "2024 – Present",
-    "stack": ["Salesforce", "Investor Relations", "Capital Markets"],
-    "goal": "Help growth-stage companies connect with the right Nordic institutional capital. Open doors to family offices, pension funds, and long-term investors that align with the business.",
+    "stack": ["CRM Systems", "Investor Relations", "B2B Sales"],
+    "goal": "Own the full sales cycle — from prospecting institutional investors to coordinating deal introductions. Build trust with family offices, pension funds, and long-term capital providers, and match them with companies whose values align.",
     "highlights": [
-      "Institutional investor outreach and relationship management",
-      "Investor matchmaking for growth-stage companies",
-      "Due diligence coordination",
-      "Nordic capital markets expertise"
+      "Outbound prospecting and relationship building with institutional investors",
+      "Pipeline management across family offices and pension funds",
+      "Deal coordination and introductions between companies and capital partners",
+      "Leveraging sales background to navigate complex stakeholders"
     ],
-    "content": "Nordic Wealth Network focuses on connecting companies with the right long-term capital partners across the Nordic region. The role combines account management, business development, and investor relations — from initial outreach to deal coordination, always focused on matching companies with investors whose horizons and values align.",
+    "content": "My role at Nordic Wealth Network is about translating sales instinct into the world of institutional capital. The same skills that built a career in B2B sales — listening past what people say, reading a room, knowing when to push and when to wait — apply directly here. Whether I'm prospecting a family office or coordinating a deal introduction, the work is about trust and alignment.",
     "links": {
       "live": "https://nordicwealthnetwork.com/",
       "github": ""
@@ -94,47 +94,24 @@
   {
     "id": "5",
     "title": "Catery",
-    "description": "Foodtech & AI platform helping companies book catering effortlessly and giving restaurants a way to expand what they offer.",
-    "image": "",
-    "tags": ["FoodTech", "AI", "Marketplace", "B2B"],
+    "description": "Co-founded and ran business development at a foodtech startup. Closed restaurants onto the platform, pitched corporate buyers, and shaped the go-to-market motion.",
+    "image": "/catery.png",
+    "tags": ["FoodTech", "BizDev", "Startups", "B2B"],
     "category": "consulting",
-    "role": "Co-Founder, Business Development",
+    "role": "Co-Founder & Business Development",
     "year": "2024 – 2025",
-    "stack": ["Node.js", "React", "PostgreSQL", "Stripe"],
-    "goal": "Make corporate catering frictionless. From quote to delivery in one flow, without the back-and-forth emails.",
+    "stack": ["B2B Sales", "Startup Operations", "Partnerships"],
+    "goal": "Build the supply side (restaurants) and demand side (corporate catering buyers) from zero. Own outreach, positioning, partnership deals, and the messaging that turned a two-sided marketplace into an actual business.",
     "highlights": [
-      "Co-founded and led business development",
-      "Two-sided marketplace (restaurants and corporate buyers)",
-      "Integrated quote-to-delivery workflow",
-      "Helped restaurants scale offerings without added complexity"
+      "Co-founded and led all business development from day one",
+      "Closed restaurant partnerships across Stockholm",
+      "Pitched corporate buyers and built the outbound sales motion",
+      "Shaped brand positioning and go-to-market strategy"
     ],
-    "content": "Corporate catering is a mess of phone calls, emailed PDFs, and last-minute changes. Catery built a platform where companies could get catering quotes, compare options, and place orders in one flow. For restaurants, it was a way to expand their corporate channel without adding operational complexity. Operated in the Stockholm market throughout 2024.",
+    "content": "As co-founder, I ran business development end-to-end. That meant cold outreach to restaurants, pitching corporate buyers, negotiating partnership terms, and constantly refining how we positioned the product. The technical side was handled by my co-founder — my job was to prove people wanted this, then go get them.",
     "links": {
       "live": "",
       "github": ""
-    }
-  },
-  {
-    "id": "6",
-    "title": "Portfolio Site",
-    "description": "This very site. A premium dark-themed portfolio with a 3D folder landing, custom animations, and a CMS-like admin mode — all hand-built.",
-    "image": "",
-    "tags": ["React", "Design", "3D", "Personal"],
-    "category": "academic",
-    "role": "Designer & Developer",
-    "year": "2026",
-    "stack": ["React", "Vite", "Tailwind CSS", "Framer Motion", "CSS 3D Transforms"],
-    "goal": "Build a portfolio that stands out without being loud. Premium dark theme, considered typography, and interactive touches that feel crafted rather than templated.",
-    "highlights": [
-      "3D CSS folder with opening animation",
-      "Custom tabbed content paper with curved page shadows",
-      "Admin mode with passphrase auth for editing projects",
-      "Fully responsive mobile layout"
-    ],
-    "content": "The portfolio you are currently looking at. Built from scratch to feel like premium stationery rather than a generic portfolio template. Every detail considered: the folder mark, the watermark stamp, the page shadows, the tabbed navigation. All using vanilla CSS and React — no heavy 3D engine.",
-    "links": {
-      "live": "",
-      "github": "https://github.com/patriktjaderqvist/venditioventures"
     }
   }
 ]

@@ -36,6 +36,17 @@ function CVIcon() {
   )
 }
 
+function CalendarIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
+  )
+}
+
 /* ── Constants ──────────────────────────────────────────── */
 
 const BORDER_DESKTOP = 'clamp(20px, 3vw, 50px)'
@@ -731,9 +742,15 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd, onOpenP
   )
 }
 
+// Web3Forms access key — replace with your own at https://web3forms.com (free)
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || ''
+const CONTACT_EMAIL = 'patriktjaderqvist@gmail.com'
+
 function ConnectContent() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
 
   const inputStyle = {
     background: 'rgba(255,255,255,0.04)',
@@ -748,9 +765,44 @@ function ConnectContent() {
     transition: 'border-color 0.2s',
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setError('')
+    setSending(true)
+
+    // If Web3Forms key is configured, use it
+    if (WEB3FORMS_KEY) {
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            name: form.name,
+            email: form.email,
+            message: form.message,
+            subject: `Portfolio contact from ${form.name}`,
+            from_name: 'Venditio Ventures Portfolio',
+          }),
+        })
+        const data = await res.json()
+        if (data.success) {
+          setSubmitted(true)
+          setSending(false)
+          return
+        }
+        throw new Error(data.message || 'Submission failed')
+      } catch (err) {
+        // Fall through to mailto fallback
+      }
+    }
+
+    // Fallback: open user's email client
+    const subject = encodeURIComponent(`Portfolio contact from ${form.name}`)
+    const body = encodeURIComponent(`${form.message}\n\n— ${form.name}\n${form.email}`)
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
     setSubmitted(true)
+    setSending(false)
   }
 
   return (
@@ -784,6 +836,27 @@ function ConnectContent() {
         >
           Interested in working together, have a question, or just want to say hello? Reach out.
         </p>
+      </div>
+
+      {/* Primary CTA — Book a call */}
+      <div className="flex justify-center mb-6">
+        <a
+          href="https://calendly.com/patriktjaderqvist"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2.5 px-6 py-3 rounded-full text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+          style={{
+            color: '#0a0a0a',
+            background: 'rgba(255,255,255,0.88)',
+            border: '1px solid rgba(255,255,255,0.95)',
+            fontWeight: 500,
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,1)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.88)' }}
+        >
+          <CalendarIcon />
+          Book a 30-min intro call
+        </a>
       </div>
 
       {/* Social links */}
@@ -865,10 +938,19 @@ function ConnectContent() {
                 onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
               />
             </div>
+            {error && (
+              <div
+                className="text-center"
+                style={{ color: 'rgba(255,120,120,0.8)', fontSize: '0.75rem', fontWeight: 300 }}
+              >
+                {error}
+              </div>
+            )}
             <div className="text-center pt-2">
               <button
                 type="submit"
-                className="cursor-pointer transition-all duration-200"
+                disabled={sending}
+                className="cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-wait"
                 style={{
                   background: 'rgba(255,255,255,0.06)',
                   border: '1px solid rgba(255,255,255,0.1)',
@@ -882,6 +964,7 @@ function ConnectContent() {
                   fontWeight: 300,
                 }}
                 onMouseEnter={(e) => {
+                  if (sending) return
                   e.target.style.background = 'rgba(255,255,255,0.1)'
                   e.target.style.borderColor = 'rgba(255,255,255,0.2)'
                 }}
@@ -890,7 +973,7 @@ function ConnectContent() {
                   e.target.style.borderColor = 'rgba(255,255,255,0.1)'
                 }}
               >
-                Send
+                {sending ? 'Sending...' : 'Send'}
               </button>
             </div>
           </form>
