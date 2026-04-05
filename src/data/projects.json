@@ -6,6 +6,17 @@
     "image": "/traided.png",
     "tags": ["AI", "Trading", "Quant", "Automation"],
     "category": "ventures",
+    "role": "Founder, Full-Stack Developer",
+    "year": "2025",
+    "stack": ["Python", "FastAPI", "React", "PostgreSQL", "OpenAI API", "Docker"],
+    "goal": "Let anyone automate trading strategies without writing code. Translate plain-English strategy descriptions into executable trading logic that runs 24/7.",
+    "highlights": [
+      "Natural language strategy parsing via LLM",
+      "Real-time market data integration",
+      "Backtesting engine against historical data",
+      "Secure broker API integrations"
+    ],
+    "content": "Traided was born from a simple question: why do you need to write code to automate a trading strategy? Most traders have ideas but lack the technical skills to execute them automatically. The platform bridges that gap — describe your strategy in natural language, and the system translates it into executable trading logic that runs around the clock. Built with Python and FastAPI on the backend, React on the frontend, and leveraging LLMs for strategy parsing.",
     "links": {
       "live": "https://traided.vercel.app/",
       "github": "https://github.com/patriktjaderqvist/traided"
@@ -18,6 +29,17 @@
     "image": "/dletter.png",
     "tags": ["AI", "Discord", "Digests", "Automation"],
     "category": "ventures",
+    "role": "Founder, Full-Stack Developer",
+    "year": "2025",
+    "stack": ["Python", "Discord API", "OpenAI API", "SendGrid", "PostgreSQL"],
+    "goal": "Turn Discord noise into signal. Make it possible to stay on top of active servers without scrolling through thousands of messages.",
+    "highlights": [
+      "Discord bot with real-time message ingestion",
+      "AI-powered summarization of key discussions",
+      "Customizable email delivery schedules",
+      "Topic clustering across channels"
+    ],
+    "content": "Discord servers generate thousands of messages daily. Miss a day and you're hopelessly behind. DLetter watches the servers you care about, summarizes the key discussions with AI, and delivers a clean digest to your inbox each morning. No more FOMO, no more endless scrolling.",
     "links": {
       "live": "https://dletter.app/",
       "github": "https://github.com/patriktjaderqvist/dletter"
@@ -30,6 +52,17 @@
     "image": "/liatch.png",
     "tags": ["EdTech", "React", "Internships", "Fullstack"],
     "category": "academic",
+    "role": "Co-Founder, Full-Stack Developer",
+    "year": "2024",
+    "stack": ["React", "Node.js", "Express", "PostgreSQL", "Tailwind CSS"],
+    "goal": "Simplify the LIA internship process for Swedish vocational students. Connect schools, students, and companies on one platform.",
+    "highlights": [
+      "Three-sided marketplace (schools, students, companies)",
+      "Internship matching and application flow",
+      "School admin dashboard for oversight",
+      "Company onboarding and talent sourcing"
+    ],
+    "content": "LIA (Lärande i Arbete) internships are required for Swedish YH students, but the matching process is chaotic — schools, students, and companies all juggling spreadsheets and emails. Liatch brings the three parties together in one place. Schools track their students, students find placements, companies source talent, all with built-in communication and oversight.",
     "links": {
       "live": "https://liatch.com/",
       "github": "https://github.com/patriktjaderqvist/liatch"
@@ -42,9 +75,66 @@
     "image": "/nwn.png",
     "tags": ["Sales", "IR", "BizDev", "Nordic"],
     "category": "consulting",
+    "role": "Account Manager & Business Development",
+    "year": "2024 – Present",
+    "stack": ["Salesforce", "Investor Relations", "Capital Markets"],
+    "goal": "Help growth-stage companies connect with the right Nordic institutional capital. Open doors to family offices, pension funds, and long-term investors that align with the business.",
+    "highlights": [
+      "Institutional investor outreach and relationship management",
+      "Investor matchmaking for growth-stage companies",
+      "Due diligence coordination",
+      "Nordic capital markets expertise"
+    ],
+    "content": "Nordic Wealth Network focuses on connecting companies with the right long-term capital partners across the Nordic region. The role combines account management, business development, and investor relations — from initial outreach to deal coordination, always focused on matching companies with investors whose horizons and values align.",
     "links": {
       "live": "https://nordicwealthnetwork.com/",
       "github": ""
+    }
+  },
+  {
+    "id": "5",
+    "title": "Catery",
+    "description": "Foodtech & AI platform helping companies book catering effortlessly and giving restaurants a way to expand what they offer.",
+    "image": "",
+    "tags": ["FoodTech", "AI", "Marketplace", "B2B"],
+    "category": "consulting",
+    "role": "Co-Founder, Business Development",
+    "year": "2024 – 2025",
+    "stack": ["Node.js", "React", "PostgreSQL", "Stripe"],
+    "goal": "Make corporate catering frictionless. From quote to delivery in one flow, without the back-and-forth emails.",
+    "highlights": [
+      "Co-founded and led business development",
+      "Two-sided marketplace (restaurants and corporate buyers)",
+      "Integrated quote-to-delivery workflow",
+      "Helped restaurants scale offerings without added complexity"
+    ],
+    "content": "Corporate catering is a mess of phone calls, emailed PDFs, and last-minute changes. Catery built a platform where companies could get catering quotes, compare options, and place orders in one flow. For restaurants, it was a way to expand their corporate channel without adding operational complexity. Operated in the Stockholm market throughout 2024.",
+    "links": {
+      "live": "",
+      "github": ""
+    }
+  },
+  {
+    "id": "6",
+    "title": "Portfolio Site",
+    "description": "This very site. A premium dark-themed portfolio with a 3D folder landing, custom animations, and a CMS-like admin mode — all hand-built.",
+    "image": "",
+    "tags": ["React", "Design", "3D", "Personal"],
+    "category": "academic",
+    "role": "Designer & Developer",
+    "year": "2026",
+    "stack": ["React", "Vite", "Tailwind CSS", "Framer Motion", "CSS 3D Transforms"],
+    "goal": "Build a portfolio that stands out without being loud. Premium dark theme, considered typography, and interactive touches that feel crafted rather than templated.",
+    "highlights": [
+      "3D CSS folder with opening animation",
+      "Custom tabbed content paper with curved page shadows",
+      "Admin mode with passphrase auth for editing projects",
+      "Fully responsive mobile layout"
+    ],
+    "content": "The portfolio you are currently looking at. Built from scratch to feel like premium stationery rather than a generic portfolio template. Every detail considered: the folder mark, the watermark stamp, the page shadows, the tabbed navigation. All using vanilla CSS and React — no heavy 3D engine.",
+    "links": {
+      "live": "",
+      "github": "https://github.com/patriktjaderqvist/venditioventures"
     }
   }
 ]

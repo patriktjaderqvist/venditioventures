@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ProjectCard from './ProjectCard'
+import ProjectDetail from './ProjectDetail'
 import defaultProjects from '../data/projects.json'
 import AddProjectModal from './AddProjectModal'
 import vvLogoSrc from '../assets/vv-logo.png'
@@ -643,7 +644,7 @@ const CATEGORY_INTROS = {
   },
 }
 
-function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd }) {
+function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd, onOpenProject }) {
   const filtered = projects.filter((p) => p.category === category)
 
   return (
@@ -685,6 +686,7 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd }) {
             index={index}
             isAdmin={isAdmin}
             onRemove={() => onRemove(project.id)}
+            onOpen={() => onOpenProject(project)}
           />
         ))}
 
@@ -1000,6 +1002,7 @@ export default function ProjectGallery({ onClose }) {
   const [activeTab, setActiveTab] = useState('story')
   const [direction, setDirection] = useState(0)
   const [addCategory, setAddCategory] = useState('ventures')
+  const [openProject, setOpenProject] = useState(null)
   const BORDER = isMobile ? BORDER_MOBILE : BORDER_DESKTOP
 
   const handleTabChange = (tabId) => {
@@ -1049,6 +1052,7 @@ export default function ProjectGallery({ onClose }) {
               setAddCategory(activeTab)
               setShowAddModal(true)
             }}
+            onOpenProject={setOpenProject}
           />
         )
         break
@@ -1209,6 +1213,13 @@ export default function ProjectGallery({ onClose }) {
       <AnimatePresence>
         {showLogin && (
           <AdminLoginModal onClose={closeLogin} onLogin={tryLogin} />
+        )}
+      </AnimatePresence>
+
+      {/* Project Detail Modal */}
+      <AnimatePresence>
+        {openProject && (
+          <ProjectDetail project={openProject} onClose={() => setOpenProject(null)} />
         )}
       </AnimatePresence>
     </motion.div>

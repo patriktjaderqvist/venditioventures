@@ -29,6 +29,12 @@ export default function AddProjectModal({ onClose, onAdd }) {
     description: '',
     image: '',
     tags: '',
+    year: '',
+    role: '',
+    goal: '',
+    content: '',
+    stack: '',
+    highlights: '',
     live: '',
     github: '',
   })
@@ -42,6 +48,12 @@ export default function AddProjectModal({ onClose, onAdd }) {
       description: form.description.trim(),
       image: form.image.trim(),
       tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean),
+      year: form.year.trim(),
+      role: form.role.trim(),
+      goal: form.goal.trim(),
+      content: form.content.trim(),
+      stack: form.stack.split(',').map((t) => t.trim()).filter(Boolean),
+      highlights: form.highlights.split('\n').map((t) => t.trim()).filter(Boolean),
       links: {
         live: form.live.trim(),
         github: form.github.trim(),
@@ -68,11 +80,12 @@ export default function AddProjectModal({ onClose, onAdd }) {
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-2xl p-5 sm:p-8 mx-3 sm:mx-0"
+        className="w-full max-w-lg rounded-2xl p-5 sm:p-8 mx-3 sm:mx-0 overflow-y-auto"
         style={{
           background: '#1a1a1e',
           border: '1px solid rgba(255,255,255,0.08)',
           boxShadow: '0 24px 80px rgba(0,0,0,0.5)',
+          maxHeight: '90vh',
         }}
       >
         <h2
@@ -130,6 +143,73 @@ export default function AddProjectModal({ onClose, onAdd }) {
               onChange={update('tags')}
               placeholder="React, Node.js, PostgreSQL"
               style={inputStyle}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label style={labelStyle}>Year</label>
+              <input
+                type="text"
+                value={form.year}
+                onChange={update('year')}
+                placeholder="2025"
+                style={inputStyle}
+              />
+            </div>
+            <div>
+              <label style={labelStyle}>Role</label>
+              <input
+                type="text"
+                value={form.role}
+                onChange={update('role')}
+                placeholder="Founder, Developer"
+                style={inputStyle}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label style={labelStyle}>Goal</label>
+            <textarea
+              value={form.goal}
+              onChange={update('goal')}
+              placeholder="What problem does this solve?"
+              rows={2}
+              style={{ ...inputStyle, resize: 'vertical' }}
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>Full Content</label>
+            <textarea
+              value={form.content}
+              onChange={update('content')}
+              placeholder="The full story — challenges, decisions, how it came together. Separate paragraphs with blank lines."
+              rows={4}
+              style={{ ...inputStyle, resize: 'vertical' }}
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>Stack (comma separated)</label>
+            <input
+              type="text"
+              value={form.stack}
+              onChange={update('stack')}
+              placeholder="Python, React, PostgreSQL, Docker"
+              style={inputStyle}
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>Highlights (one per line)</label>
+            <textarea
+              value={form.highlights}
+              onChange={update('highlights')}
+              placeholder={"Key feature or achievement one\nKey feature or achievement two"}
+              rows={3}
+              style={{ ...inputStyle, resize: 'vertical' }}
             />
           </div>
 

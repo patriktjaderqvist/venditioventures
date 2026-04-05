@@ -18,7 +18,7 @@ function LinkIcon({ type }) {
   )
 }
 
-export default function ProjectCard({ project, index, isAdmin, onRemove }) {
+export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen }) {
   const fanAngles = [-12, 0, 12, -8, 8]
   const angle = fanAngles[index % fanAngles.length]
   const descRef = useRef(null)
@@ -31,7 +31,8 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
 
   return (
     <motion.div
-      className="relative group overflow-hidden flex flex-col"
+      onClick={onOpen}
+      className="relative group overflow-hidden flex flex-col cursor-pointer"
       initial={{ borderRadius: '16px' }}
       whileHover={{
         borderRadius: '0px',
@@ -168,6 +169,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
               href={project.links.live}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-1.5 tracking-wider uppercase transition-colors duration-300 hover:!text-white"
               style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.65rem, 0.9vw, 0.6875rem)' }}
             >
@@ -180,6 +182,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove }) {
               href={project.links.github}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-1.5 tracking-wider uppercase transition-colors duration-300 hover:!text-white"
               style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.65rem, 0.9vw, 0.6875rem)' }}
             >
