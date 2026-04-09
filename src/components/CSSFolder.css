@@ -30,17 +30,60 @@
   cursor: pointer;
 }
 
-/* Drop shadow */
-.folder-body::after {
-  content: '';
+/* Curved page shadows — matching the paper div style */
+.folder-shadow-bl,
+.folder-shadow-br,
+.folder-shadow-ll,
+.folder-shadow-lb,
+.folder-shadow-rt,
+.folder-shadow-rb {
   position: absolute;
-  bottom: -18px;
-  left: 10%;
-  width: 80%;
-  height: 30px;
-  background: radial-gradient(ellipse, rgba(0,0,0,0.22) 0%, transparent 70%);
-  transform: translateZ(-20px);
   pointer-events: none;
+  background: rgba(0,0,0,0.25);
+  border-radius: 50%;
+  transform: translateZ(-20px);
+}
+
+/* Bottom edge */
+.folder-shadow-bl {
+  bottom: -6px; left: 1%;
+  width: 45%; height: 24px;
+  filter: blur(5px);
+  transform: translateZ(-20px) rotate(-1.5deg);
+}
+.folder-shadow-br {
+  bottom: -6px; right: 1%;
+  width: 45%; height: 24px;
+  filter: blur(5px);
+  transform: translateZ(-20px) rotate(1.5deg);
+}
+
+/* Left edge — starts lower to avoid top */
+.folder-shadow-ll {
+  left: -6px; top: 15%;
+  height: 35%; width: 24px;
+  filter: blur(5px);
+  transform: translateZ(-20px) rotate(-1.5deg);
+}
+.folder-shadow-lb {
+  left: -6px; bottom: 1%;
+  height: 45%; width: 24px;
+  filter: blur(5px);
+  transform: translateZ(-20px) rotate(1.5deg);
+}
+
+/* Right edge — starts lower to avoid top */
+.folder-shadow-rt {
+  right: -6px; top: 15%;
+  height: 35%; width: 24px;
+  filter: blur(5px);
+  transform: translateZ(-20px) rotate(1.5deg);
+}
+.folder-shadow-rb {
+  right: -6px; bottom: 1%;
+  height: 45%; width: 24px;
+  filter: blur(5px);
+  transform: translateZ(-20px) rotate(-1.5deg);
 }
 
 /* Shared panel base */

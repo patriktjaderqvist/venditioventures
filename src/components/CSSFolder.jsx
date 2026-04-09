@@ -94,6 +94,14 @@ export default function CSSFolder({ onOpen, closing = false }) {
             }}
             style={{ transformStyle: 'preserve-3d' }}
           >
+            {/* Curved shadows */}
+            <div className="folder-shadow-bl" />
+            <div className="folder-shadow-br" />
+            <div className="folder-shadow-ll" />
+            <div className="folder-shadow-lb" />
+            <div className="folder-shadow-rt" />
+            <div className="folder-shadow-rb" />
+
             {/* Back panel */}
             <div className="folder-panel folder-back" />
 
