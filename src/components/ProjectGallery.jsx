@@ -518,7 +518,7 @@ function StoryContent() {
             Venditio is one person. Every venture, every client engagement, every product carries the same mind and the same standard. There is no team page because there is no distance between the brand and the person behind it.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            Several years in sales and account management at 3 Sverige. Customer service, B2B relationships, 120+ corporate accounts, and building a win-back department from scratch. First person from customer service nominated for <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Salesperson of the Year</em> in over five years. That world teaches you how to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em> past what people say to what they actually need.
+            Several years in sales and account management at 3 Sverige. Customer service, B2B relationships, 120+ corporate accounts, and building a win-back department from scratch. First person from customer service nominated for <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Salesperson of the Year</em> in over five years. That world teaches you how to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em>, not just to what people say, but to what they mean.
           </p>
         </section>
 
@@ -570,41 +570,6 @@ function StoryContent() {
           </p>
         </section>
 
-        {/* CTA */}
-        <section className="text-center" style={{ paddingTop: '8px' }}>
-          <div className="mx-auto h-px w-12 mb-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          <p style={{ ...sectionStyle, color: 'rgba(255,255,255,0.6)' }}>
-            Interested in working together?
-          </p>
-          <div className="flex justify-center gap-3 mt-4 flex-wrap">
-            <a
-              href="https://www.linkedin.com/in/patriktjaderqvist/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-full text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
-              style={{
-                color: 'rgba(255,255,255,0.85)',
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)',
-              }}
-            >
-              Reach out on LinkedIn
-            </a>
-            <a
-              href="/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-full text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
-              style={{
-                color: 'rgba(255,255,255,0.5)',
-                background: 'transparent',
-                border: '1px solid rgba(255,255,255,0.06)',
-              }}
-            >
-              Download CV
-            </a>
-          </div>
-        </section>
 
       </div>
 
