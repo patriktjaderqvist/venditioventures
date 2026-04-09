@@ -512,14 +512,45 @@ function StoryContent() {
 
         {/* The Person */}
         <section>
-          <h2 style={headingStyle}>Patrik Tj&auml;derqvist</h2>
-          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          <p style={sectionStyle}>
-            Venditio is one person. Every venture, every client engagement, every product carries the same mind and the same standard. There is no team page because there is no distance between the brand and the person behind it.
-          </p>
-          <p className="mt-4" style={sectionStyle}>
-            Several years in sales and account management at 3 Sverige. Customer service, B2B relationships, 120+ corporate accounts, and building a win-back department from scratch. First person from customer service nominated for <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Salesperson of the Year</em> in over five years. That world teaches you how to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em>, not just to what people say, but to what they mean.
-          </p>
+          <div className="flex flex-col sm:flex-row items-start gap-6 sm:gap-8">
+            {/* Photo */}
+            <div className="flex-shrink-0 mx-auto sm:mx-0" style={{ marginTop: '4px' }}>
+              <div
+                className="overflow-hidden"
+                style={{
+                  width: 'clamp(100px, 15vw, 140px)',
+                  height: 'clamp(100px, 15vw, 140px)',
+                  borderRadius: '50%',
+                  border: '2px solid rgba(255,255,255,0.08)',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                  background: 'rgba(255,255,255,0.03)',
+                }}
+              >
+                <img
+                  src="/patrik.png"
+                  alt="Patrik Tjäderqvist"
+                  style={{
+                    width: '115%',
+                    height: '115%',
+                    objectFit: 'cover',
+                    objectPosition: '25% 10%',
+                    filter: 'brightness(0.85) contrast(1.1)',
+                    transform: 'rotate(-0.5deg)',
+                  }}
+                />
+              </div>
+            </div>
+            <div>
+              <h2 style={headingStyle}>Patrik Tj&auml;derqvist</h2>
+              <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
+              <p style={sectionStyle}>
+                Venditio is one person. Every venture, every client engagement, every product carries the same mind and the same standard. There is no team page because there is no distance between the brand and the person behind it.
+              </p>
+              <p className="mt-4" style={sectionStyle}>
+                Several years in sales and account management at 3 Sverige. Customer service, B2B relationships, 120+ corporate accounts, and building a win-back department from scratch. First person from customer service nominated for <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Salesperson of the Year</em> in over five years. That world teaches you how to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em>, not just to what people say, but to what they mean.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* The Evolution */}
@@ -539,7 +570,7 @@ function StoryContent() {
           <h2 style={headingStyle}>Toolbox</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <div className="flex flex-wrap gap-2 mt-2">
-            {['Python', 'React', 'JavaScript', 'Node.js', 'AI / ML', 'PostgreSQL', 'Git', 'REST APIs', 'Tailwind CSS', 'Three.js', 'CRM Systems', 'B2B Sales', 'Business Development'].map((skill) => (
+            {['Sales & Account Management', 'Business Development', 'Consulting', 'Entrepreneurship', 'Python Developer', 'Full-Stack Development', 'AI / ML', 'React', 'Node.js', 'PostgreSQL', 'REST APIs', 'CRM Systems', 'Investor Relations', 'Crypto & Trading'].map((skill) => (
               <span
                 key={skill}
                 className="px-3 py-1.5 rounded-full"

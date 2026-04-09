@@ -73,11 +73,11 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
 
       {/* Image area — dark with wireframe placeholder */}
       <div
-        className="aspect-[4/3] w-full relative overflow-hidden flex items-center justify-center flex-shrink-0"
+        className="aspect-[16/9] w-full relative overflow-hidden flex items-center justify-center flex-shrink-0"
         style={{ background: 'linear-gradient(145deg, #252528 0%, #1a1a1e 100%)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
       >
         {project.image ? (
-          <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top" />
+          <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
         ) : (
           /* Wireframe-style placeholder like the reference */
           <div className="w-[75%] h-[70%] relative">
