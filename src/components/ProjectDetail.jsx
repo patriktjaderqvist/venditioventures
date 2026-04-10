@@ -71,7 +71,7 @@ export default function ProjectDetail({ project, onClose }) {
         exit={{ opacity: 0, y: 20, scale: 0.98 }}
         transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
         onClick={(e) => e.stopPropagation()}
-        className="relative max-w-3xl mx-auto my-8 sm:my-12 mx-4 sm:mx-auto rounded-2xl overflow-hidden"
+        className="relative max-w-3xl my-6 sm:my-12 mx-5 sm:mx-auto rounded-2xl overflow-hidden"
         style={{
           background: '#16161a',
           border: '1px solid rgba(255,255,255,0.08)',
