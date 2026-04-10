@@ -21,7 +21,7 @@ export default function App() {
   const showGallery = state === 'open'
 
   return (
-    <div className="w-screen h-screen relative overflow-hidden" style={{ background: 'var(--bg)' }}>
+    <div className="w-screen relative overflow-hidden" style={{ background: 'var(--bg)', height: '100dvh' }}>
       <BackgroundText />
 
       {/* Folder scene — always mounted, always behind */}

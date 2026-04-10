@@ -28,6 +28,7 @@
   width: 50vmin;
   height: calc(50vmin / 1.414);
   cursor: pointer;
+  touch-action: none;
 }
 
 /* Curved page shadows — matching the paper div style */
