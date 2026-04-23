@@ -18,9 +18,7 @@ function LinkIcon({ type }) {
   )
 }
 
-export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen }) {
-  const fanAngles = [-12, 0, 12, -8, 8]
-  const angle = fanAngles[index % fanAngles.length]
+export default function ProjectCard({ project, isAdmin, onRemove, onOpen }) {
   const descRef = useRef(null)
   const [isTruncated, setIsTruncated] = useState(false)
 
@@ -29,20 +27,30 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
     if (el) setIsTruncated(el.scrollHeight > el.clientHeight)
   }, [project.description])
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onOpen()
+    }
+  }
+
   return (
     <motion.div
       onClick={onOpen}
-      className="relative group overflow-hidden flex flex-col cursor-pointer"
-      initial={{ borderRadius: '16px' }}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-label={`Open ${project.title} details`}
+      className="relative group overflow-hidden flex flex-col cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
       whileHover={{
-        borderRadius: '0px',
         scale: 1.03,
         boxShadow: '0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.12)',
         transition: { duration: 0.35, ease: [0.25, 0.8, 0.25, 1] },
       }}
       style={{
-        background: '#1c1c20',
-        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: '16px',
+        background: 'var(--card-bg)',
+        border: '1px solid var(--hair)',
         boxShadow: '0 4px 24px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.12)',
         height: '100%',
       }}
@@ -51,6 +59,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
       {isAdmin && (
         <button
           onClick={(e) => { e.stopPropagation(); onRemove(); }}
+          aria-label="Remove project"
           className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200"
           style={{
             background: 'rgba(255,0,0,0.15)',
@@ -74,26 +83,21 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
       {/* Image area — dark with wireframe placeholder */}
       <div
         className="aspect-[16/9] w-full relative overflow-hidden flex items-center justify-center flex-shrink-0"
-        style={{ background: 'linear-gradient(145deg, #252528 0%, #1a1a1e 100%)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+        style={{ background: 'linear-gradient(145deg, #252528 0%, #1a1a1e 100%)', borderBottom: '1px solid var(--hair)' }}
       >
         {project.image ? (
           <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
         ) : (
           /* Wireframe-style placeholder like the reference */
           <div className="w-[75%] h-[70%] relative">
-            {/* Top bar */}
             <div className="h-2 w-16 rounded-full mb-2" style={{ background: 'rgba(255,255,255,0.14)' }} />
-            {/* Title line */}
             <div className="h-2.5 w-28 rounded-full mb-1.5" style={{ background: 'rgba(255,255,255,0.16)' }} />
-            {/* Subtitle */}
             <div className="h-2 w-20 rounded-full mb-4" style={{ background: 'rgba(255,255,255,0.1)' }} />
-            {/* Content blocks */}
             <div className="flex gap-2 mb-2">
               <div className="h-10 w-16 rounded" style={{ background: 'rgba(255,255,255,0.08)' }} />
               <div className="h-10 w-16 rounded" style={{ background: 'rgba(255,255,255,0.08)' }} />
               <div className="h-10 w-16 rounded" style={{ background: 'rgba(255,255,255,0.08)' }} />
             </div>
-            {/* Text lines */}
             <div className="h-1.5 w-full rounded-full mb-1.5" style={{ background: 'rgba(255,255,255,0.06)' }} />
             <div className="h-1.5 w-3/4 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }} />
           </div>
@@ -104,7 +108,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
       <div className="p-4 sm:p-5 flex flex-col flex-1">
         <h3
           className="font-medium tracking-wide"
-          style={{ color: 'rgba(255,255,255,0.92)', fontSize: 'clamp(0.8rem, 1.2vw, 0.875rem)' }}
+          style={{ color: 'var(--text-strong)', fontSize: 'clamp(0.8rem, 1.2vw, 0.875rem)' }}
         >
           {project.title}
         </h3>
@@ -112,7 +116,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
           ref={descRef}
           className="mt-2 leading-relaxed"
           style={{
-            color: 'rgba(255,255,255,0.55)',
+            color: 'var(--text-body)',
             fontWeight: 300,
             fontSize: 'clamp(0.7rem, 1vw, 0.75rem)',
             display: '-webkit-box',
@@ -125,15 +129,16 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
         </p>
         {isTruncated && (
           <span
-            className="mt-1 cursor-pointer transition-colors duration-200 hover:!text-white"
+            aria-hidden="true"
+            className="mt-1 transition-colors duration-200 group-hover:text-white"
             style={{
-              color: 'rgba(255,255,255,0.35)',
-              fontSize: 'clamp(0.65rem, 0.9vw, 0.65rem)',
+              color: 'var(--text-dim)',
+              fontSize: '0.7rem',
               fontWeight: 400,
               letterSpacing: '0.1em',
             }}
           >
-            Read more
+            Read more →
           </span>
         )}
 
@@ -147,10 +152,10 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
               key={tag}
               className="px-1.5 py-px rounded-full tracking-wider uppercase whitespace-nowrap"
               style={{
-                color: 'rgba(255,255,255,0.4)',
-                background: 'rgba(255,255,255,0.06)',
+                color: 'var(--text-soft)',
+                background: 'var(--fill-02)',
                 fontWeight: 400,
-                fontSize: 'clamp(0.55rem, 0.7vw, 0.55rem)',
+                fontSize: '0.6rem',
                 lineHeight: 1.6,
               }}
             >
@@ -162,7 +167,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
         {/* Links */}
         <div
           className="flex gap-4 mt-3 pt-3"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+          style={{ borderTop: '1px solid var(--hair)' }}
         >
           {project.links.live && (
             <a
@@ -171,7 +176,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-1.5 tracking-wider uppercase transition-colors duration-300 hover:!text-white"
-              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.65rem, 0.9vw, 0.6875rem)' }}
+              style={{ color: 'var(--text-soft)', fontWeight: 400, fontSize: '0.7rem' }}
             >
               <LinkIcon type="external" />
               Live
@@ -184,7 +189,7 @@ export default function ProjectCard({ project, index, isAdmin, onRemove, onOpen 
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-1.5 tracking-wider uppercase transition-colors duration-300 hover:!text-white"
-              style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, fontSize: 'clamp(0.65rem, 0.9vw, 0.6875rem)' }}
+              style={{ color: 'var(--text-soft)', fontWeight: 400, fontSize: '0.7rem' }}
             >
               <LinkIcon type="github" />
               Source

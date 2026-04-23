@@ -39,7 +39,7 @@
       "Customizable email delivery schedules",
       "Topic clustering across channels"
     ],
-    "content": "Discord servers generate thousands of messages daily. Miss a day and you're hopelessly behind. DLetter watches the servers you care about, summarizes the key discussions with AI, and delivers a clean digest to your inbox each morning. No more FOMO, no more endless scrolling.",
+    "content": "Discord servers generate thousands of messages daily. Miss a day and you're hopelessly behind. DLetter watches the servers you care about, summarizes the key discussions with AI, and delivers a clean digest to your inbox each morning. Signal instead of noise.",
     "links": {
       "live": "https://dletter.app/",
       "github": "https://github.com/patriktjaderqvist/dletter"
@@ -71,21 +71,21 @@
   {
     "id": "4",
     "title": "Nordic Wealth Network",
-    "description": "Running account management and business development. Building institutional investor relationships across the Nordics and opening doors for growth-stage companies.",
+    "description": "Account management and business development at a Nordic capital advisory. Owning the full sales cycle — prospecting, relationship building, deal coordination.",
     "image": "/nwn.png",
     "tags": ["Sales", "IR", "BizDev", "Nordic"],
     "category": "consulting",
     "role": "Account Manager & Business Development",
     "year": "2024 – Present",
     "stack": ["CRM Systems", "Investor Relations", "B2B Sales"],
-    "goal": "Own the full sales cycle — from prospecting institutional investors to coordinating deal introductions. Build trust with family offices, pension funds, and long-term capital providers, and match them with companies whose values align.",
+    "goal": "Own the full sales cycle at a Nordic capital advisory. Build pipeline with family offices, pension funds, and long-term capital providers. Match growth-stage companies with investors whose horizons and values align.",
     "highlights": [
-      "Outbound prospecting and relationship building with institutional investors",
-      "Pipeline management across family offices and pension funds",
-      "Deal coordination and introductions between companies and capital partners",
-      "Leveraging sales background to navigate complex stakeholders"
+      "Outbound prospecting and relationship building across Nordic institutional investors",
+      "Pipeline management and weekly reporting for family offices and funds",
+      "Coordinated investor introductions between companies and capital partners",
+      "Outcomes under NDA"
     ],
-    "content": "My role at Nordic Wealth Network is about translating sales instinct into the world of institutional capital. The same skills that built a career in B2B sales — listening past what people say, reading a room, knowing when to push and when to wait — apply directly here. Whether I'm prospecting a family office or coordinating a deal introduction, the work is about trust and alignment.",
+    "content": "At Nordic Wealth Network I own the full cycle: outreach, qualifying, nurturing, and coordinating deal introductions. The work is about trust and alignment — matching companies with the right long-term capital, not just any capital. Specific outcomes are under NDA, but the pipeline is real and the relationships are being built.",
     "links": {
       "live": "https://nordicwealthnetwork.com/",
       "github": ""
@@ -108,7 +108,7 @@
       "Pitched corporate buyers and built the outbound sales motion",
       "Shaped brand positioning and go-to-market strategy"
     ],
-    "content": "As co-founder, I ran business development end-to-end. That meant cold outreach to restaurants, pitching corporate buyers, negotiating partnership terms, and constantly refining how we positioned the product. The technical side was handled by my co-founder — my job was to prove people wanted this, then go get them.",
+    "content": "As co-founder, I ran business development end-to-end. Cold outreach to restaurants, pitching corporate buyers, negotiating partnership terms, and constantly refining how the product was positioned. The technical side was handled by my co-founder — my job was to prove people wanted this, then go get them. The venture wound down in 2025 to free up focus for Avendavi, but the lesson carries: you learn what a market actually needs by getting rejected by it first.",
     "links": {
       "live": "",
       "github": ""

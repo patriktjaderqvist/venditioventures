@@ -36,8 +36,8 @@ export default function CSSFolder({ onOpen, closing = false }) {
         dragRot.current.y = clamp(dragRot.current.y + dx * 40, -55, 55)
         setRotation({ x: dragRot.current.x, y: dragRot.current.y })
       } else {
-        // Subtle pointer follow
-        setRotation({ x: ny * -7, y: nx * 12 })
+        // Subtle pointer follow — classy tilt, not gimmicky
+        setRotation({ x: ny * -5, y: nx * 7 })
       }
 
       lastPointer.current = { x: nx, y: ny }

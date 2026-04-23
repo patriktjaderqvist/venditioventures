@@ -9,7 +9,7 @@
 
 .folder-scene {
   transform-style: preserve-3d;
-  transition: transform 0.15s ease-out;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .folder-float {

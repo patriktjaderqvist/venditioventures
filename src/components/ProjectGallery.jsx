@@ -258,26 +258,27 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
       {/* Main tab body */}
       <button
         onClick={onClick}
-        className="relative cursor-pointer transition-colors duration-300"
+        aria-current={isActive ? 'page' : undefined}
+        className="relative cursor-pointer transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
         style={{
           height: isMobile ? TAB_HEIGHT - 8 : TAB_HEIGHT + 6,
           paddingTop: 0,
           paddingBottom: 0,
           paddingLeft: isFirst
-            ? (isMobile ? '14px' : 'clamp(18px, 2vw, 30px)')
-            : (isMobile ? '8px' : 'clamp(12px, 1.5vw, 22px)'),
+            ? (isMobile ? '16px' : 'clamp(20px, 2vw, 32px)')
+            : (isMobile ? '12px' : 'clamp(14px, 1.5vw, 24px)'),
           paddingRight: isLast
-            ? (isMobile ? '14px' : 'clamp(18px, 2vw, 30px)')
-            : (isMobile ? '8px' : 'clamp(12px, 1.5vw, 22px)'),
+            ? (isMobile ? '16px' : 'clamp(20px, 2vw, 32px)')
+            : (isMobile ? '12px' : 'clamp(14px, 1.5vw, 24px)'),
           margin: `0 ${EAR}px`,
           marginLeft: isFirst ? 0 : `${EAR}px`,
           marginRight: isLast ? 0 : `${EAR}px`,
-          fontSize: isMobile ? '7px' : 'clamp(7.5px, 0.75vw, 9.5px)',
+          fontSize: isMobile ? '10px' : 'clamp(10px, 1vw, 11.5px)',
           letterSpacing: '0.14em',
           textTransform: 'uppercase',
           fontFamily: 'var(--font-body)',
-          fontWeight: isActive ? 400 : 300,
-          color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.5)',
+          fontWeight: isActive ? 500 : 300,
+          color: isActive ? 'var(--text-strong)' : 'var(--text-soft)',
           background: bg,
           borderRadius: '6px 6px 0 0',
           clipPath: tabClipPath || undefined,
@@ -289,16 +290,16 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
           flexShrink: 0,
         }}
         onMouseEnter={(e) => {
-          if (!isActive) e.currentTarget.style.color = 'rgba(255,255,255,0.7)'
+          if (!isActive) e.currentTarget.style.color = 'var(--text-strong)'
         }}
         onMouseLeave={(e) => {
-          if (!isActive) e.currentTarget.style.color = 'rgba(255,255,255,0.5)'
+          if (!isActive) e.currentTarget.style.color = 'var(--text-soft)'
         }}
       >
         {tab.label}
       </button>
 
-      {/* Depth gradient — darker toward bottom-left, more intense for tabs further back */}
+      {/* Depth gradient — consistent subtle darkening for all inactive tabs */}
       {!isActive && (
         <div
           className="absolute bottom-0 pointer-events-none"
@@ -307,102 +308,13 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
             height: '100%',
             borderRadius: '6px 6px 0 0',
             clipPath: tabClipPath || undefined,
-            background: `linear-gradient(to top right,
-              rgba(0,0,0,${0.15 + index * 0.1}) 0%,
-              rgba(0,0,0,${0.06 + index * 0.04}) 50%,
-              rgba(255,255,255,${0.02 + index * 0.01}) 100%)`,
+            background: `linear-gradient(to top,
+              rgba(0,0,0,0.25) 0%,
+              rgba(0,0,0,0.1) 60%,
+              rgba(255,255,255,0.02) 100%)`,
           }}
         />
       )}
-    </div>
-  )
-}
-
-function CloseTab({ onClick, isMobile }) {
-  const bg = 'var(--bg-elevated)'
-  const EAR = 8
-
-  return (
-    <div
-      className="relative"
-      style={{
-        zIndex: 1,
-        transform: 'translateY(10px)',
-      }}
-    >
-      {/* Left ear */}
-      <div
-        className="absolute bottom-0 left-0"
-        style={{ width: EAR, height: EAR, background: 'transparent', overflow: 'hidden' }}
-      >
-        <div style={{
-          position: 'absolute', bottom: 0, right: 0,
-          width: EAR * 2, height: EAR * 2,
-          borderRadius: `0 0 ${EAR}px 0`,
-          boxShadow: `${EAR / 2}px ${EAR / 2}px 0 ${EAR / 2}px ${bg}`,
-        }} />
-      </div>
-
-      {/* Right ear */}
-      <div
-        className="absolute bottom-0 right-0"
-        style={{ width: EAR, height: EAR, background: 'transparent', overflow: 'hidden' }}
-      >
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0,
-          width: EAR * 2, height: EAR * 2,
-          borderRadius: `0 0 0 ${EAR}px`,
-          boxShadow: `-${EAR / 2}px ${EAR / 2}px 0 ${EAR / 2}px ${bg}`,
-        }} />
-      </div>
-
-      <button
-        onClick={onClick}
-        className="relative cursor-pointer transition-colors duration-300"
-        style={{
-          height: isMobile ? TAB_HEIGHT - 8 : TAB_HEIGHT + 6,
-          padding: '0 18px',
-          margin: `0 ${EAR}px`,
-          fontSize: '9.5px',
-          letterSpacing: '0.14em',
-          textTransform: 'uppercase',
-          fontFamily: 'var(--font-body)',
-          fontWeight: 300,
-          color: 'rgba(255,255,255,0.5)',
-          background: bg,
-          borderRadius: '6px 6px 0 0',
-          border: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '6px',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.color = 'rgba(255,255,255,0.8)'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.color = 'rgba(255,255,255,0.5)'
-        }}
-      >
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-
-      {/* Depth gradient — same as inactive tabs */}
-      <div
-        className="absolute bottom-0 pointer-events-none"
-        style={{
-          left: EAR, right: EAR,
-          height: '100%',
-          borderRadius: '6px 6px 0 0',
-          background: `linear-gradient(to top right,
-            rgba(0,0,0,0.35) 0%,
-            rgba(0,0,0,0.12) 50%,
-            transparent 100%)`,
-        }}
-      />
     </div>
   )
 }
@@ -411,7 +323,7 @@ function CloseTab({ onClick, isMobile }) {
 
 function StoryContent() {
   const sectionStyle = {
-    color: 'var(--text-secondary)',
+    color: 'var(--text-body)',
     fontFamily: 'var(--font-body)',
     fontSize: 'clamp(0.82rem, 1.2vw, 0.95rem)',
     lineHeight: 1.8,
@@ -475,7 +387,7 @@ function StoryContent() {
               letterSpacing: '0.03em',
             }}
           >
-            Consulting &middot; Ventures &middot; Products
+            Consulting &middot; Ventures &middot; Academic
           </p>
         </div>
       </div>
@@ -485,21 +397,16 @@ function StoryContent() {
 
         {/* The Name */}
         <section>
-          <h2 style={headingStyle}>Avendavi</h2>
-          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
-
           {/* Dictionary-style pronunciation */}
-          <div className="mb-5" style={{ color: 'rgba(255,255,255,0.4)', fontSize: 'clamp(0.75rem, 1vw, 0.85rem)', lineHeight: 1.4 }}>
+          <div className="mb-5" style={{ color: 'var(--text-primary)', fontSize: 'clamp(1.05rem, 1.8vw, 1.35rem)', lineHeight: 1.4 }}>
             <span style={{ fontStyle: 'italic', fontFamily: 'var(--font-display)', letterSpacing: '0.05em' }}>a&middot;vend&middot;a&middot;vi</span>
-            <span style={{ margin: '0 10px', opacity: 0.5 }}>|</span>
-            <span style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.02em' }}>/ɑː&middot;ˈvɛn&middot;də&middot;vi/</span>
           </div>
 
           <p style={sectionStyle}>
-            Built from two Latin roots: <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>vendere</em>, to sell, and <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>avis</em>, bird. Not a translation. A blend. Run them together, trim the seams, and what comes out is <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>avendavi</em>.
+            Built from two Latin roots — <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>vendere</em>, to sell, and <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>avis</em>, bird — run together into something new: <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>avendavi</em>.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            It fits on two fronts. A career built in sales. And a surname, <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Tj&auml;derqvist</em>, that already carries a bird inside it — <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>tj&auml;der</em>, the capercaillie, a forest grouse native to the Nordics. The bird was there before the brand was.
+            The name lands in two places at once. A career built in sales, and a surname — <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Tj&auml;derqvist</em> — that already carries a bird inside it. <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Tj&auml;der</em>, the capercaillie, a forest grouse native to the Nordics. The bird was there before the brand was.
           </p>
         </section>
 
@@ -527,7 +434,6 @@ function StoryContent() {
                     height: '115%',
                     objectFit: 'cover',
                     objectPosition: '25% 10%',
-                    filter: 'brightness(0.85) contrast(1.1)',
                     transform: 'rotate(-0.5deg)',
                   }}
                 />
@@ -537,10 +443,13 @@ function StoryContent() {
               <h2 style={headingStyle}>Patrik Tj&auml;derqvist</h2>
               <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
               <p style={sectionStyle}>
-                Avendavi is one person. Every venture, every client engagement, every product carries the same mind and the same standard. There is no team page because there is no distance between the brand and the person behind it.
+                Avendavi is one person. Every engagement carries the same mind, the same eye, the same standard — from first email to final delivery.
               </p>
               <p className="mt-4" style={sectionStyle}>
-                Several years in sales and account management at 3 Sverige. Customer service, B2B relationships, 120+ corporate accounts, and building a win-back department from scratch. First person from customer service nominated for <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Salesperson of the Year</em> in over five years. That world teaches you how to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em>, not just to what people say, but to what they mean.
+                Six years in sales and account management at 3 Sverige. Customer service, B2B relationships, 120+ corporate accounts, and building a win-back department from scratch. The first person from customer service nominated for <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Salesperson of the Year</em> in over five years.
+              </p>
+              <p className="mt-4" style={sectionStyle}>
+                The pattern carried: listen first, build second.
               </p>
             </div>
           </div>
@@ -551,10 +460,10 @@ function StoryContent() {
           <h2 style={headingStyle}>The Evolution</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            The same drive that built a sales career now goes into building things. Python development with an AI specialization at Nackademin. Private investing across stocks, crypto, and NFTs. And Avendavi, the vehicle where it all comes together. Idea, analysis, prototype, product.
+            The same drive that built a sales career now builds software. Python and AI at Nackademin (2024–2026). Private investing across stocks and crypto. And Avendavi AB, the holding that ties it together.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            Driven by growth and by building systems that create <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>real value</em>. Analytical, research-driven, always looking for where technology meets business.
+            The path is consistent: idea, research, prototype, product. Analytical by default. Interested in where technology meets business, and how sales instinct changes what gets built.
           </p>
         </section>
 
@@ -563,7 +472,7 @@ function StoryContent() {
           <h2 style={headingStyle}>Toolbox</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <div className="flex flex-wrap gap-2 mt-2">
-            {['Sales & Account Management', 'Business Development', 'Consulting', 'Entrepreneurship', 'Python Developer', 'Full-Stack Development', 'Agentic Coding', 'AI / ML', 'React', 'Node.js', 'PostgreSQL', 'REST APIs', 'CRM Systems', 'Investor Relations', 'Crypto & Trading'].map((skill) => (
+            {['Consulting', 'Business Development', 'Product Strategy', 'Go-to-Market', 'B2B Sales', 'Full-Stack Development', 'Python', 'AI Engineering', 'Agentic Coding', 'React', 'Node.js', 'PostgreSQL', 'REST APIs', 'CRM Systems', 'Investor Relations'].map((skill) => (
               <span
                 key={skill}
                 className="px-3 py-1.5 rounded-full"
@@ -587,44 +496,16 @@ function StoryContent() {
           <h2 style={headingStyle}>The Approach</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            Most problems hide in plain sight. A workflow everyone tolerates. A product that almost works. A process that exists because nobody questioned it. Avendavi steps in where others see normal, finds what can be <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>better</em>, and builds the fix.
+            The work starts with listening. Reading the codebase, sitting in on calls, writing down everything that feels off. Only then does the building start.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            Consulting and product development under one roof. Client work is informed by the discipline of building real products. Own ventures are shaped by the clarity that comes from solving other people's problems first. The two sharpen each other.
+            Client work stays honest because I ship my own products. The ventures stay grounded because I see other people's problems up close. Consulting and product development under one roof, and the two sharpen each other.
           </p>
         </section>
 
 
       </div>
 
-      {/* Divider */}
-      <div className="max-w-3xl mx-auto px-5 sm:px-8">
-        <div className="h-px w-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
-      </div>
-
-      {/* Connect section */}
-      <div className="max-w-3xl mx-auto px-5 sm:px-8 py-12">
-        <p
-          className="text-center text-xs tracking-[0.2em] uppercase mb-6"
-          style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
-        >
-          Connect
-        </p>
-        <div className="flex justify-center gap-4 flex-wrap">
-          <SocialLink href="https://www.linkedin.com/in/patriktjaderqvist/">
-            <LinkedInIcon />
-            LinkedIn
-          </SocialLink>
-          <SocialLink href="https://github.com/patriktjaderqvist">
-            <GitHubIcon />
-            GitHub
-          </SocialLink>
-          <SocialLink href="/cv.pdf">
-            <CVIcon />
-            Resume
-          </SocialLink>
-        </div>
-      </div>
     </div>
   )
 }
@@ -640,7 +521,7 @@ const CATEGORY_INTROS = {
   },
   academic: {
     title: 'Academic',
-    description: 'The projects that built the foundation. Where theory met practice for the first time.',
+    description: 'Early work from the Nackademin years. The foundations.',
   },
 }
 
@@ -679,11 +560,10 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd, onOpenP
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: 'clamp(16px, 1.5vw, 20px)' }}>
-        {filtered.map((project, index) => (
+        {filtered.map((project) => (
           <ProjectCard
             key={project.id}
             project={project}
-            index={index}
             isAdmin={isAdmin}
             onRemove={() => onRemove(project.id)}
             onOpen={() => onOpenProject(project)}
@@ -886,13 +766,15 @@ function ConnectContent() {
               Thank you for reaching out.
             </p>
             <p className="mt-2" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 300 }}>
-              We'll get back to you shortly.
+              I'll get back to you shortly.
             </p>
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
+              <label htmlFor="contact-name" className="sr-only">Name</label>
               <input
+                id="contact-name"
                 type="text"
                 placeholder="Name"
                 required
@@ -904,7 +786,9 @@ function ConnectContent() {
               />
             </div>
             <div>
+              <label htmlFor="contact-email" className="sr-only">Email</label>
               <input
+                id="contact-email"
                 type="email"
                 placeholder="Email"
                 required
@@ -916,7 +800,9 @@ function ConnectContent() {
               />
             </div>
             <div>
+              <label htmlFor="contact-message" className="sr-only">Message</label>
               <textarea
+                id="contact-message"
                 placeholder="Your message..."
                 required
                 rows={5}
@@ -1075,6 +961,17 @@ export default function ProjectGallery({ onClose }) {
   const [direction, setDirection] = useState(0)
   const [addCategory, setAddCategory] = useState('ventures')
   const [openProject, setOpenProject] = useState(null)
+
+  // Close gallery on Escape (when no modal/project detail is open)
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'Escape' && !showAddModal && !showLogin && !openProject) {
+        onClose()
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose, showAddModal, showLogin, openProject])
   const BORDER = isMobile ? BORDER_MOBILE : BORDER_DESKTOP
 
   const handleTabChange = (tabId) => {
@@ -1086,7 +983,7 @@ export default function ProjectGallery({ onClose }) {
 
   const pageVariants = {
     enter: (dir) => ({
-      x: dir > 0 ? '60%' : '-60%',
+      x: dir > 0 ? '10%' : '-10%',
       opacity: 0,
     }),
     center: {
@@ -1094,14 +991,14 @@ export default function ProjectGallery({ onClose }) {
       opacity: 1,
     },
     exit: (dir) => ({
-      x: dir > 0 ? '-40%' : '40%',
+      x: dir > 0 ? '-10%' : '10%',
       opacity: 0,
     }),
   }
 
   const pageTransition = {
     type: 'tween',
-    duration: 0.4,
+    duration: 0.25,
     ease: [0.25, 0.8, 0.25, 1],
   }
 
