@@ -1,4 +1,4 @@
-# Venditio Ventures
+# Avendavi
 
 A portfolio website for Patrik Tjäderqvist featuring an interactive 3D folder experience that opens to reveal a project gallery. Built with React, Three.js, and Framer Motion.
 

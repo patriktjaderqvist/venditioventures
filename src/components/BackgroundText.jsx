@@ -14,8 +14,7 @@ export default function BackgroundText() {
           lineHeight: 1,
         }}
       >
-        <span>Venditio</span>
-        <span>Ventures</span>
+        <span>Avendavi</span>
       </div>
     </div>
   )

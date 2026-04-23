@@ -460,7 +460,7 @@ function StoryContent() {
               lineHeight: 1.1,
             }}
           >
-            Venditio Ventures
+            Avendavi
           </h1>
           <div className="mt-4 mx-auto h-px w-12" style={{ background: 'rgba(255,255,255,0.08)' }} />
           <p
@@ -485,10 +485,13 @@ function StoryContent() {
 
         {/* The Name */}
         <section>
-          <h2 style={headingStyle}>Venditio</h2>
+          <h2 style={headingStyle}>Avendavi</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            From the Latin <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>venditio</em>, the act of selling, the art of the deal. Not the kind that pushes product. The kind that reads a room, understands what drives a person, and knows when to speak and when to listen. That instinct is behind everything built here.
+            From the Latin <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>a vend avi</em>, a selling bird. The name is a play on two things: a career built in sales, and a surname, <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Tj&auml;derqvist</em>, that carries a bird inside it — <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>tj&auml;der</em>, the capercaillie, a forest grouse native to the Nordics.
+          </p>
+          <p className="mt-4" style={sectionStyle}>
+            A bird that sells. Or a bird that sees. Either way, the instinct is the same: read the room, understand what drives a person, know when to speak and when to listen. Not the kind of sales that pushes product. The kind that earns trust. That instinct is behind everything built here.
           </p>
         </section>
 
@@ -504,7 +507,7 @@ function StoryContent() {
             />
             <div>
               <p style={sectionStyle}>
-                Two V's. Venditio Ventures. The double V carries the initials, but it also reads as a W. That was never an accident. The W carries the intent. <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Win</em>. Every project ships with the same goal: <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>come out on top</em>. For the client, for the user, for the product. The mark is a reminder that the work isn't done until someone wins.
+                Two V's. <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>aVendaVi</em>. The double V hides inside the name, and together they read as a W. That was never an accident. The W carries the intent. <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Win</em>. Every project ships with the same goal: <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>come out on top</em>. For the client, for the user, for the product. The mark is a reminder that the work isn't done until someone wins.
               </p>
             </div>
           </div>
@@ -544,7 +547,7 @@ function StoryContent() {
               <h2 style={headingStyle}>Patrik Tj&auml;derqvist</h2>
               <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
               <p style={sectionStyle}>
-                Venditio is one person. Every venture, every client engagement, every product carries the same mind and the same standard. There is no team page because there is no distance between the brand and the person behind it.
+                Avendavi is one person. Every venture, every client engagement, every product carries the same mind and the same standard. There is no team page because there is no distance between the brand and the person behind it.
               </p>
               <p className="mt-4" style={sectionStyle}>
                 Several years in sales and account management at 3 Sverige. Customer service, B2B relationships, 120+ corporate accounts, and building a win-back department from scratch. First person from customer service nominated for <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Salesperson of the Year</em> in over five years. That world teaches you how to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em>, not just to what people say, but to what they mean.
@@ -558,7 +561,7 @@ function StoryContent() {
           <h2 style={headingStyle}>The Evolution</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            The same drive that built a sales career now goes into building things. Python development with an AI specialization at Nackademin. Private investing across stocks, crypto, and NFTs. And Venditio Ventures AB, the vehicle where it all comes together. Idea, analysis, prototype, product.
+            The same drive that built a sales career now goes into building things. Python development with an AI specialization at Nackademin. Private investing across stocks, crypto, and NFTs. And Avendavi, the vehicle where it all comes together. Idea, analysis, prototype, product.
           </p>
           <p className="mt-4" style={sectionStyle}>
             Driven by growth and by building systems that create <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>real value</em>. Analytical, research-driven, always looking for where technology meets business.
@@ -570,7 +573,7 @@ function StoryContent() {
           <h2 style={headingStyle}>Toolbox</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <div className="flex flex-wrap gap-2 mt-2">
-            {['Sales & Account Management', 'Business Development', 'Consulting', 'Entrepreneurship', 'Python Developer', 'Full-Stack Development', 'AI / ML', 'React', 'Node.js', 'PostgreSQL', 'REST APIs', 'CRM Systems', 'Investor Relations', 'Crypto & Trading'].map((skill) => (
+            {['Sales & Account Management', 'Business Development', 'Consulting', 'Entrepreneurship', 'Python Developer', 'Full-Stack Development', 'Agentic Coding', 'AI / ML', 'React', 'Node.js', 'PostgreSQL', 'REST APIs', 'CRM Systems', 'Investor Relations', 'Crypto & Trading'].map((skill) => (
               <span
                 key={skill}
                 className="px-3 py-1.5 rounded-full"
@@ -594,7 +597,7 @@ function StoryContent() {
           <h2 style={headingStyle}>The Approach</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
           <p style={sectionStyle}>
-            Most problems hide in plain sight. A workflow everyone tolerates. A product that almost works. A process that exists because nobody questioned it. Venditio steps in where others see normal, finds what can be <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>better</em>, and builds the fix.
+            Most problems hide in plain sight. A workflow everyone tolerates. A product that almost works. A process that exists because nobody questioned it. Avendavi steps in where others see normal, finds what can be <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>better</em>, and builds the fix.
           </p>
           <p className="mt-4" style={sectionStyle}>
             Consulting and product development under one roof. Client work is informed by the discipline of building real products. Own ventures are shaped by the clarity that comes from solving other people's problems first. The two sharpen each other.
@@ -639,7 +642,7 @@ function StoryContent() {
 const CATEGORY_INTROS = {
   ventures: {
     title: 'Our Ventures',
-    description: 'Products built from the ground up. Each with its own brand, its own audience, all under the Venditio umbrella.',
+    description: 'Products built from the ground up. Each with its own brand, its own audience, all under the Avendavi umbrella.',
   },
   consulting: {
     title: 'Consulting',
@@ -778,7 +781,7 @@ function ConnectContent() {
             email: form.email,
             message: form.message,
             subject: `Portfolio contact from ${form.name}`,
-            from_name: 'Venditio Ventures Portfolio',
+            from_name: 'Avendavi Portfolio',
           }),
         })
         const data = await res.json()
@@ -986,7 +989,7 @@ function ConnectContent() {
           style={{ width: '32px', opacity: 0.25, filter: 'invert(1)' }}
         />
         <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.1em', fontWeight: 300 }}>
-          Venditio Ventures AB
+          Avendavi AB
         </p>
         <p className="mt-2" style={{ color: 'rgba(255,255,255,0.1)', fontSize: '0.6rem', letterSpacing: '0.08em', fontWeight: 300 }}>
           &copy; {new Date().getFullYear()}
