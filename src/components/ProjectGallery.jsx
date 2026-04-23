@@ -487,30 +487,20 @@ function StoryContent() {
         <section>
           <h2 style={headingStyle}>Avendavi</h2>
           <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
+
+          {/* Dictionary-style pronunciation */}
+          <div className="mb-5" style={{ color: 'rgba(255,255,255,0.4)', fontSize: 'clamp(0.75rem, 1vw, 0.85rem)', lineHeight: 1.4 }}>
+            <span style={{ fontStyle: 'italic', fontFamily: 'var(--font-display)', letterSpacing: '0.05em' }}>a&middot;vend&middot;a&middot;vi</span>
+            <span style={{ margin: '0 10px', opacity: 0.5 }}>|</span>
+            <span style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.02em' }}>/ɑː&middot;ˈvɛn&middot;də&middot;vi/</span>
+          </div>
+
           <p style={sectionStyle}>
-            From the Latin <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>a vend avi</em>, a selling bird. The name is a play on two things: a career built in sales, and a surname, <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Tj&auml;derqvist</em>, that carries a bird inside it — <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>tj&auml;der</em>, the capercaillie, a forest grouse native to the Nordics.
+            Built from two Latin roots: <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>vendere</em>, to sell, and <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>avis</em>, bird. Not a translation. A blend. Run them together, trim the seams, and what comes out is <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>avendavi</em>.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            A bird that sells. Or a bird that sees. Either way, the instinct is the same: read the room, understand what drives a person, know when to speak and when to listen. Not the kind of sales that pushes product. The kind that earns trust. That instinct is behind everything built here.
+            It fits on two fronts. A career built in sales. And a surname, <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Tj&auml;derqvist</em>, that already carries a bird inside it — <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>tj&auml;der</em>, the capercaillie, a forest grouse native to the Nordics. The bird was there before the brand was.
           </p>
-        </section>
-
-        {/* The Mark */}
-        <section>
-          <h2 style={headingStyle}>The Mark</h2>
-          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          <div className="flex items-start gap-6">
-            <img
-              src={vvLogoSrc}
-              alt="VV"
-              style={{ width: '56px', opacity: 0.6, filter: 'invert(1)', flexShrink: 0, marginTop: '4px' }}
-            />
-            <div>
-              <p style={sectionStyle}>
-                Two V's. <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>aVendaVi</em>. The double V hides inside the name, and together they read as a W. That was never an accident. The W carries the intent. <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Win</em>. Every project ships with the same goal: <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>come out on top</em>. For the client, for the user, for the product. The mark is a reminder that the work isn't done until someone wins.
-              </p>
-            </div>
-          </div>
         </section>
 
         {/* The Person */}
