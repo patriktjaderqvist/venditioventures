@@ -22,10 +22,24 @@ export default function App() {
 
   return (
     <div className="w-screen relative overflow-hidden" style={{ background: 'var(--bg)', height: '100dvh' }}>
-      <BackgroundText />
+      <div
+        style={{
+          opacity: state === 'open' ? 0 : 1,
+          transition: 'opacity 0.3s ease',
+        }}
+      >
+        <BackgroundText />
+      </div>
 
-      {/* Folder scene — always mounted, always behind */}
-      <div className="absolute inset-0 z-10">
+      {/* Folder scene — always mounted, fades out once the gallery is visible */}
+      <div
+        className="absolute inset-0 z-10"
+        style={{
+          opacity: state === 'open' ? 0 : 1,
+          transition: 'opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
+          pointerEvents: state === 'open' ? 'none' : 'auto',
+        }}
+      >
         <CSSFolder onOpen={handleOpen} closing={isClosing} />
 
         {/* Hint — only when fully idle */}
@@ -44,15 +58,14 @@ export default function App() {
         )}
       </div>
 
-      {/* Gallery overlays on top — fades in/out */}
+      {/* Gallery overlays on top — crossfades with the folder */}
       <AnimatePresence>
         {showGallery && (
           <motion.div
             key="gallery"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+            animate={{ opacity: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
+            exit={{ opacity: 0, transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] } }}
             className="absolute inset-0 z-20 overflow-y-auto overflow-x-hidden"
           >
             <ProjectGallery onClose={handleClose} />

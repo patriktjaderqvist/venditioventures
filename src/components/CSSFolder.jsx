@@ -1,6 +1,5 @@
 import { useRef, useState, useCallback, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import vvLogo from '../assets/vv-logo.png'
 import './CSSFolder.css'
 
 export default function CSSFolder({ onOpen, closing = false }) {
@@ -108,16 +107,59 @@ export default function CSSFolder({ onOpen, closing = false }) {
             {/* Tab */}
             <div className="folder-tab" />
 
-            {/* Inner face */}
+            {/* Inner face — clean, no paper grain */}
             <div className="folder-panel folder-inner" />
 
-            {/* Front panel with logo */}
-            <div className={`folder-panel folder-front ${isOpen ? 'open' : ''}`}>
-              <img src={vvLogo} alt="" className="folder-logo" />
-            </div>
+            {/* Leather strap — single front segment, static (no unlatch animation) */}
+            <div className="folder-strap-front" />
+
+            {/* Front panel — flips open */}
+            <div className={`folder-panel folder-front ${isOpen ? 'open' : ''}`} />
+
+            {/* Silver buckle — sibling of strap, sits in front in Z */}
+            <SilverBuckle />
           </motion.div>
         </div>
       </div>
     </div>
+  )
+}
+
+/* ── Silver A-buckle ── */
+/* The literal letter "A" in silver, rotated 180° so it reads upside-down.
+   Solid serif letterform with metallic gradient. */
+function SilverBuckle() {
+  return (
+    <svg
+      className="folder-buckle"
+      viewBox="0 0 38 38"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="buckleMetal" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f4f6f9" />
+          <stop offset="0.25" stopColor="#c8cdd3" />
+          <stop offset="0.5" stopColor="#7e838b" />
+          <stop offset="0.75" stopColor="#acb1b9" />
+          <stop offset="1" stopColor="#3d4046" />
+        </linearGradient>
+      </defs>
+
+      {/* Letter "A" rotated 180° so it sits upside-down */}
+      <text
+        x="19"
+        y="30"
+        textAnchor="middle"
+        fontFamily="Georgia, 'Times New Roman', serif"
+        fontWeight="700"
+        fontSize="36"
+        fill="url(#buckleMetal)"
+        stroke="rgba(0,0,0,0.35)"
+        strokeWidth="0.4"
+        transform="rotate(180 19 19)"
+      >
+        A
+      </text>
+    </svg>
   )
 }

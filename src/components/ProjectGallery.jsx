@@ -393,7 +393,7 @@ function StoryContent() {
       </div>
 
       {/* Story content */}
-      <div className="max-w-3xl mx-auto px-5 sm:px-8 py-6 sm:py-8 space-y-10 sm:space-y-12">
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 pt-6 sm:pt-8 pb-20 sm:pb-32 space-y-10 sm:space-y-12">
 
         {/* The Name */}
         <section>
@@ -529,7 +529,7 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd, onOpenP
   const filtered = projects.filter((p) => p.category === category)
 
   return (
-    <div className="max-w-6xl mx-auto pt-12 pb-12" style={{ padding: 'clamp(24px, 3vw, 48px)' }}>
+    <div className="max-w-6xl mx-auto" style={{ padding: 'clamp(24px, 3vw, 48px)', paddingBottom: 'clamp(80px, 10vw, 140px)' }}>
 
       {/* Tab intro */}
       <div className="w-full text-center mb-10">
@@ -1062,20 +1062,6 @@ export default function ProjectGallery({ onClose }) {
         className="cursor-pointer"
         style={{ padding: isMobile ? `${BORDER}px` : `${BORDER} ${BORDER} ${BORDER}`, paddingTop: isMobile ? `${BORDER + 28}px` : `calc(${BORDER} + 12px)`, paddingBottom: isMobile ? '60px' : 'clamp(60px, 8vw, 120px)', minHeight: '100vh' }}
       >
-
-        {/* VV stamp on white area */}
-        <div className="flex justify-center" style={{ marginBottom: '-20px', marginTop: '-40px', pointerEvents: 'none' }}>
-          <img
-            src={vvLogoSrc}
-            alt=""
-            style={{
-              width: 'clamp(100px, 15vw, 180px)',
-              opacity: 0.1,
-              userSelect: 'none',
-              filter: 'drop-shadow(1px 2px 1px rgba(0,0,0,0.15)) drop-shadow(-1px -1px 0px rgba(255,255,255,0.7))',
-            }}
-          />
-        </div>
 
         {/* Tabs row — inactive tabs peek from behind the paper */}
         <div
