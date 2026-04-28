@@ -64,9 +64,9 @@ function useIsMobile() {
 }
 
 const TABS = [
-  { id: 'story', label: 'The Story' },
-  { id: 'ventures', label: 'Our Work' },
-  { id: 'consulting', label: 'Consulting' },
+  { id: 'story', label: 'Story' },
+  { id: 'ventures', label: 'Work' },
+  { id: 'consulting', label: 'Consult' },
   { id: 'academic', label: 'Academic' },
   { id: 'connect', label: 'Connect' },
 ]
@@ -82,15 +82,15 @@ function SocialLink({ href, children }) {
       className="flex items-center gap-2.5 px-5 py-2.5 rounded-full text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
       style={{
         color: 'var(--text-secondary)',
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.06)',
+        background: 'rgba(0,0,0,0.03)',
+        border: '1px solid rgba(0,0,0,0.06)',
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
-        e.currentTarget.style.color = 'rgba(255,255,255,0.9)'
+        e.currentTarget.style.background = 'rgba(0,0,0,0.07)'
+        e.currentTarget.style.color = 'rgba(0,0,0,0.9)'
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
+        e.currentTarget.style.background = 'rgba(0,0,0,0.03)'
         e.currentTarget.style.color = 'var(--text-secondary)'
       }}
     >
@@ -222,7 +222,15 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
         zIndex: isActive ? 20 : (total - index),
         transform: isActive ? 'translateY(4px)' : 'translateY(10px)',
         marginRight: isLast ? 0 : `-${EAR * 2 + 6}px`,
-        filter: 'none',
+        /* Stacked drop-shadows mirror the leather folder's thickness shadow
+           (1–6px hard layers, then a soft drop) — gives each tab depth. */
+        filter: `
+          drop-shadow(0 1px 0 rgba(0,0,0,0.35))
+          drop-shadow(0 2px 0 rgba(0,0,0,0.3))
+          drop-shadow(0 3px 0 rgba(0,0,0,0.25))
+          drop-shadow(0 4px 0 rgba(0,0,0,0.2))
+          drop-shadow(0 6px 10px rgba(0,0,0,0.25))
+        `,
       }}
     >
       {/* Left ear — inverse radius curve (not on first tab) */}
@@ -255,26 +263,26 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
         </div>
       )}
 
-      {/* Main tab body */}
+      {/* Main tab body — fluid sizing scales with viewport width */}
       <button
         onClick={onClick}
         aria-current={isActive ? 'page' : undefined}
         className="relative cursor-pointer transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
         style={{
-          height: isMobile ? TAB_HEIGHT - 8 : TAB_HEIGHT + 6,
+          height: 'clamp(36px, 7vw, 54px)',
           paddingTop: 0,
           paddingBottom: 0,
           paddingLeft: isFirst
-            ? (isMobile ? '16px' : 'clamp(20px, 2vw, 32px)')
-            : (isMobile ? '12px' : 'clamp(14px, 1.5vw, 24px)'),
+            ? 'clamp(10px, 2.5vw, 32px)'
+            : 'clamp(6px, 1.6vw, 24px)',
           paddingRight: isLast
-            ? (isMobile ? '16px' : 'clamp(20px, 2vw, 32px)')
-            : (isMobile ? '12px' : 'clamp(14px, 1.5vw, 24px)'),
+            ? 'clamp(10px, 2.5vw, 32px)'
+            : 'clamp(6px, 1.6vw, 24px)',
           margin: `0 ${EAR}px`,
           marginLeft: isFirst ? 0 : `${EAR}px`,
           marginRight: isLast ? 0 : `${EAR}px`,
-          fontSize: isMobile ? '10px' : 'clamp(10px, 1vw, 11.5px)',
-          letterSpacing: '0.14em',
+          fontSize: 'clamp(8px, 1.4vw, 10px)',
+          letterSpacing: 'clamp(0.08em, 0.3vw, 0.14em)',
           textTransform: 'uppercase',
           fontFamily: 'var(--font-body)',
           fontWeight: isActive ? 500 : 300,
@@ -299,19 +307,21 @@ function FolderTab({ tab, isActive, onClick, index, total, isMobile }) {
         {tab.label}
       </button>
 
-      {/* Depth gradient — consistent subtle darkening for all inactive tabs */}
+      {/* Depth gradient — consistent subtle darkening for all inactive tabs.
+          Extend to 0 on the side without an ear so first/last tabs are fully covered. */}
       {!isActive && (
         <div
           className="absolute bottom-0 pointer-events-none"
           style={{
-            left: EAR, right: EAR,
+            left: isFirst ? 0 : EAR,
+            right: isLast ? 0 : EAR,
             height: '100%',
             borderRadius: '6px 6px 0 0',
             clipPath: tabClipPath || undefined,
             background: `linear-gradient(to top,
               rgba(0,0,0,0.25) 0%,
               rgba(0,0,0,0.1) 60%,
-              rgba(255,255,255,0.02) 100%)`,
+              rgba(0,0,0,0.02) 100%)`,
           }}
         />
       )}
@@ -328,6 +338,9 @@ function StoryContent() {
     fontSize: 'clamp(0.82rem, 1.2vw, 0.95rem)',
     lineHeight: 1.8,
     fontWeight: 300,
+    textAlign: 'justify',
+    hyphens: 'auto',
+    WebkitHyphens: 'auto',
   }
 
   const headingStyle = {
@@ -342,21 +355,26 @@ function StoryContent() {
 
   return (
     <div className="relative">
-      {/* VV monogram watermark — only on The Story */}
+      {/* Upside-down A monogram watermark — only on The Story */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
         style={{ zIndex: 0 }}
+        aria-hidden="true"
       >
-        <img
-          src={vvLogoSrc}
-          alt=""
+        <span
           style={{
-            width: 'clamp(250px, 35vw, 500px)',
-            opacity: 0.03,
-            filter: 'invert(1)',
+            fontFamily: 'var(--font-display)',
+            fontWeight: 400,
+            fontSize: 'clamp(280px, 40vw, 560px)',
+            color: 'rgba(0,0,0,0.04)',
+            lineHeight: 1,
+            transform: 'rotate(180deg)',
+            display: 'inline-block',
             userSelect: 'none',
           }}
-        />
+        >
+          A
+        </span>
       </div>
 
       {/* Header */}
@@ -374,7 +392,7 @@ function StoryContent() {
           >
             Avendavi
           </h1>
-          <div className="mt-4 mx-auto h-px w-12" style={{ background: 'rgba(255,255,255,0.08)' }} />
+          <div className="mt-4 mx-auto h-px w-12" style={{ background: 'rgba(0,0,0,0.08)' }} />
           <p
             className="mt-5"
             style={{
@@ -382,7 +400,7 @@ function StoryContent() {
               fontSize: 'clamp(0.85rem, 1.5vw, 1.1rem)',
               fontWeight: 300,
               fontStyle: 'italic',
-              color: 'rgba(255,255,255,0.4)',
+              color: 'rgba(0,0,0,0.4)',
               lineHeight: 1.6,
               letterSpacing: '0.03em',
             }}
@@ -421,9 +439,9 @@ function StoryContent() {
                   width: 'clamp(100px, 15vw, 140px)',
                   height: 'clamp(100px, 15vw, 140px)',
                   borderRadius: '50%',
-                  border: '2px solid rgba(255,255,255,0.08)',
+                  border: '2px solid rgba(0,0,0,0.08)',
                   boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-                  background: 'rgba(255,255,255,0.03)',
+                  background: 'rgba(0,0,0,0.03)',
                 }}
               >
                 <img
@@ -441,15 +459,12 @@ function StoryContent() {
             </div>
             <div>
               <h2 style={headingStyle}>Patrik Tj&auml;derqvist</h2>
-              <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
+              <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(0,0,0,0.06)' }} />
               <p style={sectionStyle}>
-                Avendavi is one person. Every engagement carries the same mind, the same eye, the same standard — from first email to final delivery.
+                Avendavi is one person. Every venture, every client engagement, every product carries the same mind and the same standard. There is no team page because there is no distance between the brand and the person behind it.
               </p>
               <p className="mt-4" style={sectionStyle}>
-                Six years in sales and account management at 3 Sverige. Customer service, B2B relationships, 120+ corporate accounts, and building a win-back department from scratch. The first person from customer service nominated for <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>Salesperson of the Year</em> in over five years.
-              </p>
-              <p className="mt-4" style={sectionStyle}>
-                The pattern carried: listen first, build second.
+                The foundation is sales — years of cold calls, objections, and closing taught things no classroom can. How to <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>listen</em> past what people say to what they actually need. That gap is where real value lives, and it is the lens through which every problem gets solved.
               </p>
             </div>
           </div>
@@ -458,28 +473,28 @@ function StoryContent() {
         {/* The Evolution */}
         <section>
           <h2 style={headingStyle}>The Evolution</h2>
-          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(0,0,0,0.06)' }} />
           <p style={sectionStyle}>
-            The same drive that built a sales career now builds software. Python and AI at Nackademin (2024–2026). Private investing across stocks and crypto. And Avendavi AB, the holding that ties it together.
+            The same drive that built a sales career now goes into building things. Python development with an AI specialization at Nackademin. Private investing across stocks, crypto, and NFTs. And Avendavi, the vehicle where it all comes together. Idea, analysis, prototype, product.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            The path is consistent: idea, research, prototype, product. Analytical by default. Interested in where technology meets business, and how sales instinct changes what gets built.
+            Driven by growth and by building systems that create <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>real value</em>. Analytical, research-driven, always looking for where technology meets business.
           </p>
         </section>
 
         {/* Toolbox */}
         <section>
           <h2 style={headingStyle}>Toolbox</h2>
-          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(0,0,0,0.06)' }} />
           <div className="flex flex-wrap gap-2 mt-2">
-            {['Consulting', 'Business Development', 'Product Strategy', 'Go-to-Market', 'B2B Sales', 'Full-Stack Development', 'Python', 'AI Engineering', 'Agentic Coding', 'React', 'Node.js', 'PostgreSQL', 'REST APIs', 'CRM Systems', 'Investor Relations'].map((skill) => (
+            {['Sales & Account Management', 'Business Development', 'Consulting', 'Entrepreneurship', 'Python Developer', 'Full-Stack Development', 'Agentic Coding', 'AI / ML', 'React', 'Node.js', 'PostgreSQL', 'REST APIs', 'CRM Systems', 'Investor Relations', 'Crypto & Trading'].map((skill) => (
               <span
                 key={skill}
                 className="px-3 py-1.5 rounded-full"
                 style={{
-                  color: 'rgba(255,255,255,0.55)',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  color: 'rgba(0,0,0,0.55)',
+                  background: 'rgba(0,0,0,0.04)',
+                  border: '1px solid rgba(0,0,0,0.06)',
                   fontSize: 'clamp(0.65rem, 1vw, 0.75rem)',
                   fontWeight: 300,
                   letterSpacing: '0.05em',
@@ -494,12 +509,12 @@ function StoryContent() {
         {/* The Approach */}
         <section>
           <h2 style={headingStyle}>The Approach</h2>
-          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <div className="mt-1 mb-4 h-px w-8" style={{ background: 'rgba(0,0,0,0.06)' }} />
           <p style={sectionStyle}>
-            The work starts with listening. Reading the codebase, sitting in on calls, writing down everything that feels off. Only then does the building start.
+            Most problems hide in plain sight. A workflow everyone tolerates. A product that almost works. A process that exists because nobody questioned it. Avendavi steps in where others see normal and finds what can be <em style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>better</em> — then builds the solution.
           </p>
           <p className="mt-4" style={sectionStyle}>
-            Client work stays honest because I ship my own products. The ventures stay grounded because I see other people's problems up close. Consulting and product development under one roof, and the two sharpen each other.
+            Consulting and product development under one roof. Client work is informed by the discipline of building real products. Own ventures are shaped by the clarity that comes from solving other people's problems first. The two sharpen each other.
           </p>
         </section>
 
@@ -545,7 +560,7 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd, onOpenP
         >
           {CATEGORY_INTROS[category]?.title}
         </h2>
-        <div className="mt-3 mx-auto h-px w-12" style={{ background: 'rgba(255,255,255,0.08)' }} />
+        <div className="mt-3 mx-auto h-px w-12" style={{ background: 'rgba(0,0,0,0.08)' }} />
         <p
           className="mt-4 mx-auto"
           style={{
@@ -575,8 +590,8 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd, onOpenP
             onClick={onAdd}
             className="rounded-2xl overflow-hidden flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-white/20"
             style={{
-              background: 'rgba(255,255,255,0.02)',
-              border: '2px dashed rgba(255,255,255,0.1)',
+              background: 'rgba(0,0,0,0.02)',
+              border: '2px dashed rgba(0,0,0,0.1)',
               minHeight: '320px',
             }}
             whileHover={{ scale: 1.02 }}
@@ -584,14 +599,14 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd, onOpenP
             <div className="text-center">
               <div
                 className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3"
-                style={{ background: 'rgba(255,255,255,0.06)' }}
+                style={{ background: 'rgba(0,0,0,0.06)' }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: 'rgba(0,0,0,0.4)' }}>
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
               </div>
-              <p className="text-[11px] tracking-[0.15em] uppercase" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              <p className="text-[11px] tracking-[0.15em] uppercase" style={{ color: 'rgba(0,0,0,0.3)' }}>
                 Add Project
               </p>
             </div>
@@ -602,7 +617,7 @@ function ProjectsContent({ projects, category, isAdmin, onRemove, onAdd, onOpenP
       {filtered.length === 0 && !isAdmin && (
         <p
           className="text-center py-20 text-sm tracking-wide"
-          style={{ color: 'rgba(255,255,255,0.25)' }}
+          style={{ color: 'rgba(0,0,0,0.25)' }}
         >
           Projects coming soon.
         </p>
@@ -622,8 +637,8 @@ function ConnectContent() {
   const [error, setError] = useState('')
 
   const inputStyle = {
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: 'rgba(0,0,0,0.04)',
+    border: '1px solid rgba(0,0,0,0.08)',
     borderRadius: '8px',
     padding: '12px 16px',
     color: 'var(--text-primary)',
@@ -692,7 +707,7 @@ function ConnectContent() {
         >
           Connect
         </h2>
-        <div className="mt-3 mx-auto h-px w-12" style={{ background: 'rgba(255,255,255,0.08)' }} />
+        <div className="mt-3 mx-auto h-px w-12" style={{ background: 'rgba(0,0,0,0.08)' }} />
         <p
           className="mt-4 mx-auto"
           style={{
@@ -715,13 +730,13 @@ function ConnectContent() {
           rel="noopener noreferrer"
           className="flex items-center gap-2.5 px-6 py-3 rounded-full text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
           style={{
-            color: '#0a0a0a',
-            background: 'rgba(255,255,255,0.88)',
-            border: '1px solid rgba(255,255,255,0.95)',
+            color: 'var(--bg-elevated)',
+            background: 'var(--bg)',
+            border: '1px solid var(--bg)',
             fontWeight: 500,
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,1)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.88)' }}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85' }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = '1' }}
         >
           <CalendarIcon />
           Book a 30-min intro call
@@ -745,7 +760,7 @@ function ConnectContent() {
       </div>
 
       {/* Divider */}
-      <div className="mx-auto h-px w-full mb-12" style={{ background: 'rgba(255,255,255,0.05)' }} />
+      <div className="mx-auto h-px w-full mb-12" style={{ background: 'rgba(0,0,0,0.05)' }} />
 
       {/* Contact form */}
       <div className="max-w-md mx-auto">
@@ -781,8 +796,8 @@ function ConnectContent() {
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.2)'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+                onFocus={(e) => e.target.style.borderColor = 'rgba(0,0,0,0.2)'}
+                onBlur={(e) => e.target.style.borderColor = 'rgba(0,0,0,0.08)'}
               />
             </div>
             <div>
@@ -795,8 +810,8 @@ function ConnectContent() {
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.2)'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+                onFocus={(e) => e.target.style.borderColor = 'rgba(0,0,0,0.2)'}
+                onBlur={(e) => e.target.style.borderColor = 'rgba(0,0,0,0.08)'}
               />
             </div>
             <div>
@@ -809,8 +824,8 @@ function ConnectContent() {
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 style={{ ...inputStyle, resize: 'vertical', minHeight: '120px' }}
-                onFocus={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.2)'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+                onFocus={(e) => e.target.style.borderColor = 'rgba(0,0,0,0.2)'}
+                onBlur={(e) => e.target.style.borderColor = 'rgba(0,0,0,0.08)'}
               />
             </div>
             {error && (
@@ -827,8 +842,8 @@ function ConnectContent() {
                 disabled={sending}
                 className="cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-wait"
                 style={{
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: 'rgba(0,0,0,0.06)',
+                  border: '1px solid rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                   padding: '10px 32px',
                   color: 'var(--text-primary)',
@@ -840,12 +855,12 @@ function ConnectContent() {
                 }}
                 onMouseEnter={(e) => {
                   if (sending) return
-                  e.target.style.background = 'rgba(255,255,255,0.1)'
-                  e.target.style.borderColor = 'rgba(255,255,255,0.2)'
+                  e.target.style.background = 'rgba(0,0,0,0.1)'
+                  e.target.style.borderColor = 'rgba(0,0,0,0.2)'
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.background = 'rgba(255,255,255,0.06)'
-                  e.target.style.borderColor = 'rgba(255,255,255,0.1)'
+                  e.target.style.background = 'rgba(0,0,0,0.06)'
+                  e.target.style.borderColor = 'rgba(0,0,0,0.1)'
                 }}
               >
                 {sending ? 'Sending...' : 'Send'}
@@ -857,17 +872,37 @@ function ConnectContent() {
 
       {/* Footer */}
       <div className="text-center mt-16 pb-12">
-        <div className="mx-auto h-px w-full mb-10" style={{ background: 'rgba(255,255,255,0.05)' }} />
-        <img
-          src={vvLogoSrc}
-          alt="VV"
+        <div className="mx-auto h-px w-full mb-10" style={{ background: 'rgba(0,0,0,0.05)' }} />
+        <div
           className="mx-auto mb-5"
-          style={{ width: '32px', opacity: 0.25, filter: 'invert(1)' }}
-        />
-        <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.1em', fontWeight: 300 }}>
+          style={{
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          aria-label="Avendavi"
+        >
+          <span
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 400,
+              fontSize: '34px',
+              lineHeight: 1,
+              color: 'rgba(0,0,0,0.25)',
+              transform: 'rotate(180deg)',
+              display: 'inline-block',
+              userSelect: 'none',
+            }}
+          >
+            A
+          </span>
+        </div>
+        <p style={{ color: 'rgba(0,0,0,0.2)', fontSize: '0.7rem', letterSpacing: '0.1em', fontWeight: 300 }}>
           Avendavi AB
         </p>
-        <p className="mt-2" style={{ color: 'rgba(255,255,255,0.1)', fontSize: '0.6rem', letterSpacing: '0.08em', fontWeight: 300 }}>
+        <p className="mt-2" style={{ color: 'rgba(0,0,0,0.1)', fontSize: '0.6rem', letterSpacing: '0.08em', fontWeight: 300 }}>
           &copy; {new Date().getFullYear()}
         </p>
       </div>
@@ -910,7 +945,7 @@ function AdminLoginModal({ onClose, onLogin }) {
         className="w-full max-w-xs rounded-xl p-6"
         style={{
           background: '#1a1a1e',
-          border: '1px solid rgba(255,255,255,0.08)',
+          border: '1px solid rgba(0,0,0,0.08)',
         }}
       >
         <form onSubmit={handleSubmit}>
@@ -922,8 +957,8 @@ function AdminLoginModal({ onClose, onLogin }) {
             autoFocus
             className="w-full mb-3"
             style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: error ? '1px solid rgba(255,80,80,0.4)' : '1px solid rgba(255,255,255,0.08)',
+              background: 'rgba(0,0,0,0.04)',
+              border: error ? '1px solid rgba(255,80,80,0.4)' : '1px solid rgba(0,0,0,0.08)',
               borderRadius: '6px',
               padding: '10px 14px',
               color: 'var(--text-primary)',
@@ -937,7 +972,7 @@ function AdminLoginModal({ onClose, onLogin }) {
             className="w-full py-2 rounded-md text-[11px] tracking-[0.12em] uppercase cursor-pointer"
             style={{
               color: '#0a0a0a',
-              background: 'rgba(255,255,255,0.85)',
+              background: 'rgba(0,0,0,0.85)',
               border: 'none',
               fontWeight: 500,
             }}
@@ -1054,49 +1089,161 @@ export default function ProjectGallery({ onClose }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
       className="w-full"
-      style={{ background: 'var(--bg)', overflowX: 'hidden' }}
+      style={{ background: 'transparent', overflowX: 'hidden' }}
     >
-      {/* Entire white area closes the folder */}
+      {/* The "folder" — dark leather area inset from the page background, three-layer
+          composition: page bg (around) → dark folder (here) → white paper (inside).
+          Stacked box-shadows simulate the thickness of a leather slab; the soft outer
+          shadow lifts the folder off the page background. */}
       <div
         onClick={onClose}
-        className="cursor-pointer"
-        style={{ padding: isMobile ? `${BORDER}px` : `${BORDER} ${BORDER} ${BORDER}`, paddingTop: isMobile ? `${BORDER + 28}px` : `calc(${BORDER} + 12px)`, paddingBottom: isMobile ? '60px' : 'clamp(60px, 8vw, 120px)', minHeight: '100vh' }}
+        className="cursor-pointer relative"
+        style={{
+          background: 'var(--bg)',
+          /* Pure vw with min floors so the layout scales linearly at any screen size
+             (no upper caps that would break proportions on large viewports) */
+          margin: isMobile ? '12px' : 'max(24px, 3vw)',
+          marginTop: isMobile ? '50px' : 'max(112px, 10.5vw)',
+          borderRadius: isMobile ? '14px' : 'clamp(16px, 1.5vw, 24px)',
+          /* Slightly tighter top inset so the paper sits closer to the tab,
+             with the side and bottom dark border unchanged. */
+          padding: isMobile ? '16px 20px 20px' : 'max(22px, 2.3vw) max(28px, 3vw) max(28px, 3vw)',
+          minHeight: 'calc(100vh - 96px)',
+          boxShadow: `
+            0 1px 0 rgba(0,0,0,0.55),
+            0 2px 0 rgba(0,0,0,0.5),
+            0 3px 0 rgba(0,0,0,0.45),
+            0 4px 0 rgba(0,0,0,0.4),
+            0 5px 0 rgba(0,0,0,0.35),
+            0 6px 0 rgba(0,0,0,0.3),
+            0 10px 22px rgba(0,0,0,0.35),
+            0 22px 48px rgba(0,0,0,0.28)
+          `,
+        }}
       >
+        {/* Folder tab — outer dark shape. Width = 42vw ≈ 45% of dark folder body
+            (matching the closed 3D folder's 40% ratio). Aspect 3.33:1 and polygon
+            (80%, 45%) match the closed tab silhouette. */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: isMobile ? '-22px' : 'calc(-7.56vw + 12px)',
+            left: 0,
+            width: isMobile ? '170px' : '42vw',
+            height: isMobile ? '50px' : '12.6vw',
+            background: 'var(--bg)',
+            clipPath: 'polygon(0 100%, 0 0, 80% 0, 100% 45%, 100% 100%)',
+            borderRadius: '8px 0 0 0',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
 
-        {/* Tabs row — inactive tabs peek from behind the paper */}
+        {/* Paper tab background — off-white shape that holds the buttons. Carries the
+            stacked drop-shadow filter so the tab reads with depth WITHOUT applying the
+            shadow to the buttons themselves (which would shadow the text). */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: isMobile ? '-4px' : 'calc(-7.56vw + 3vw + 24px)',
+            left: isMobile ? '12px' : '3vw',
+            width: isMobile ? '146px' : 'calc(42vw - 6vw)',
+            height: isMobile ? '38px' : 'calc(12.6vw - 3vw)',
+            background: 'var(--tab-inactive-bg)',
+            /* Paper polygon coords adjusted so its angle is parallel to the black
+               tab's ~34° angle (matching closed 3D folder) and inset 3vw perpendicular */
+            clipPath: 'polygon(0 100%, 0 0, 82% 0, 100% 45%, 100% 100%)',
+            pointerEvents: 'none',
+            zIndex: 1,
+            filter: `
+              drop-shadow(0 1px 0 rgba(0,0,0,0.35))
+              drop-shadow(0 2px 0 rgba(0,0,0,0.3))
+              drop-shadow(0 3px 0 rgba(0,0,0,0.25))
+              drop-shadow(0 4px 0 rgba(0,0,0,0.2))
+              drop-shadow(0 6px 10px rgba(0,0,0,0.25))
+            `,
+          }}
+        />
+
+        {/* Tab buttons — each sized to its own word + equal padding, centered text.
+            The buttons sit on top of the paper-tab background. */}
         <div
           onClick={(e) => e.stopPropagation()}
-          className="flex items-end justify-between"
+          className="flex items-stretch"
           style={{
-            marginBottom: '-1px',
-            position: 'relative',
+            position: 'absolute',
+            top: isMobile ? '-4px' : 'calc(-7.56vw + 3vw + 24px)',
+            left: isMobile ? '12px' : '3vw',
+            width: isMobile ? '146px' : 'calc(42vw - 6vw)',
+            height: isMobile ? '38px' : 'calc(12.6vw - 3vw)',
+            zIndex: 2,
+            clipPath: 'polygon(0 100%, 0 0, 82% 0, 100% 45%, 100% 100%)',
+            /* Reserve the angled-corner area on the right so buttons don't extend
+               into it (CONNECT would otherwise get clipped by the polygon angle). */
+            paddingRight: isMobile ? '26px' : '18%',
           }}
         >
-          {/* Left: navigation tabs */}
-          <div
-            className="flex items-end"
-            style={{
-              paddingLeft: isMobile ? '14px' : '24px',
-              overflowX: isMobile ? 'auto' : 'visible',
-              WebkitOverflowScrolling: 'touch',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              width: '100%',
-            }}
-          >
-            {TABS.map((tab, i) => (
-              <FolderTab
+          {TABS.map((tab, i) => {
+            const isActive = activeTab === tab.id
+            const isFirst = i === 0
+            const isLast = i === TABS.length - 1
+            return (
+              <button
                 key={tab.id}
-                tab={tab}
-                index={i}
-                total={TABS.length}
-                isActive={activeTab === tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                isMobile={isMobile}
-              />
-            ))}
-          </div>
-
+                aria-current={isActive ? 'page' : undefined}
+                className="cursor-pointer transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+                style={{
+                  /* First 4 buttons grow to fill extra space; CONNECT stays content-sized
+                     so it sits flush at the right edge while the others get bigger. */
+                  flex: isLast ? '0 0 auto' : '1 1 auto',
+                  background: isActive ? 'var(--bg-elevated)' : 'transparent',
+                  border: 'none',
+                  /* Vertical divider between adjacent tabs */
+                  borderRight: !isLast ? '1px solid rgba(0,0,0,0.15)' : 'none',
+                  /* Buttons are simple rectangles. The parent container handles the
+                     paper-tab polygon silhouette via its own clip-path. */
+                  borderRadius: 0,
+                  /* Pure vw scaling with min floor — no upper cap, so the buttons grow
+                     linearly with screen size in lockstep with the tab dimensions. */
+                  fontSize: 'max(9px, 1vw)',
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: isActive ? 500 : 400,
+                  color: isActive ? 'var(--text-strong)' : 'var(--text-soft)',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  /* Each tab's width = word width + equal horizontal padding. Small
+                     extra paddingTop nudges centered text to the polygon's centroid
+                     (which sits ~2% below box center because the top-right is clipped). */
+                  paddingLeft: isMobile ? '4px' : 'max(4px, 0.7vw)',
+                  paddingRight: isMobile ? '4px' : 'max(4px, 0.7vw)',
+                  paddingTop: 0,
+                  paddingBottom: isMobile ? '16px' : 'max(18px, 2.1vw)',
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'rgba(0,0,0,0.05)'
+                    e.currentTarget.style.color = 'var(--text-primary)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'transparent'
+                    e.currentTarget.style.color = 'var(--text-soft)'
+                  }
+                }}
+              >
+                {tab.label}
+              </button>
+            )
+          })}
         </div>
 
         {/* Shadow wrapper — no overflow hidden so shadows peek out */}
@@ -1110,13 +1257,12 @@ export default function ProjectGallery({ onClose }) {
           <div className="shadow-right-top" />
           <div className="shadow-right-bottom" />
 
-        {/* Dark content box — "the paper" */}
+        {/* Premium thick paper — warm parchment with fiber grain and stitched inseam */}
         <div
           onClick={(e) => e.stopPropagation()}
-          className="relative"
+          className="relative paper-light"
           style={{
-            background: 'var(--bg-elevated)',
-            borderRadius: '16px',
+            borderRadius: 0,
             minHeight: '200vh',
             position: 'relative',
             zIndex: 1,
@@ -1128,13 +1274,13 @@ export default function ProjectGallery({ onClose }) {
             onClick={onClose}
             className="absolute top-5 right-6 z-20 cursor-pointer transition-all duration-300"
             style={{
-              color: 'rgba(255,255,255,0.3)',
+              color: 'rgba(0,0,0,0.3)',
               background: 'none',
               border: 'none',
               padding: '4px',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.3)'}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.7)'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.3)'}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />

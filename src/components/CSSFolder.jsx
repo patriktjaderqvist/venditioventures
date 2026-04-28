@@ -104,20 +104,26 @@ export default function CSSFolder({ onOpen, closing = false }) {
             {/* Back panel */}
             <div className="folder-panel folder-back" />
 
-            {/* Tab */}
+            {/* Tab — anchored to the back panel only */}
             <div className="folder-tab" />
 
             {/* Inner face — clean, no paper grain */}
             <div className="folder-panel folder-inner" />
 
-            {/* Leather strap — single front segment, static (no unlatch animation) */}
-            <div className="folder-strap-front" />
+            {/* Stacked papers inside the folder — visible once the front swings open */}
+            <div className="folder-paper folder-paper-back" />
+            <div className="folder-paper folder-paper-mid" />
+            <div className="folder-paper folder-paper-front" />
+
+            {/* Leather strap — retracts upward (dragged to the back) before the front opens */}
+            <div className={`folder-strap-front ${isOpen ? 'open' : ''}`} />
 
             {/* Front panel — flips open */}
             <div className={`folder-panel folder-front ${isOpen ? 'open' : ''}`} />
 
-            {/* Silver buckle — sibling of strap, sits in front in Z */}
-            <SilverBuckle />
+            {/* Silver buckle — sibling of strap (so it stays z-above), but rotates in
+                lockstep with the front panel via matching transform-origin/timing */}
+            <SilverBuckle isOpen={isOpen} />
           </motion.div>
         </div>
       </div>
@@ -128,10 +134,10 @@ export default function CSSFolder({ onOpen, closing = false }) {
 /* ── Silver A-buckle ── */
 /* The literal letter "A" in silver, rotated 180° so it reads upside-down.
    Solid serif letterform with metallic gradient. */
-function SilverBuckle() {
+function SilverBuckle({ isOpen = false }) {
   return (
     <svg
-      className="folder-buckle"
+      className={`folder-buckle ${isOpen ? 'open' : ''}`}
       viewBox="0 0 38 38"
       xmlns="http://www.w3.org/2000/svg"
     >

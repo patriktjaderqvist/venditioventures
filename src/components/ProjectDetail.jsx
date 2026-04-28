@@ -41,14 +41,14 @@ export default function ProjectDetail({ project, onClose }) {
     fontFamily: 'var(--font-display)',
     fontSize: 'clamp(0.85rem, 1.2vw, 1rem)',
     fontWeight: 400,
-    color: 'rgba(255,255,255,0.9)',
+    color: 'rgba(0,0,0,0.9)',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
     lineHeight: 1.2,
   }
 
   const bodyText = {
-    color: 'rgba(255,255,255,0.65)',
+    color: 'rgba(0,0,0,0.65)',
     fontFamily: 'var(--font-body)',
     fontSize: 'clamp(0.82rem, 1.1vw, 0.9rem)',
     lineHeight: 1.8,
@@ -74,7 +74,7 @@ export default function ProjectDetail({ project, onClose }) {
         className="relative max-w-3xl my-6 sm:my-12 mx-5 sm:mx-auto rounded-2xl overflow-hidden"
         style={{
           background: '#16161a',
-          border: '1px solid rgba(255,255,255,0.08)',
+          border: '1px solid rgba(0,0,0,0.08)',
           boxShadow: '0 30px 80px rgba(0,0,0,0.6)',
         }}
       >
@@ -84,16 +84,16 @@ export default function ProjectDetail({ project, onClose }) {
           className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200"
           style={{
             background: 'rgba(0,0,0,0.4)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            color: 'rgba(255,255,255,0.7)',
+            border: '1px solid rgba(0,0,0,0.1)',
+            color: 'rgba(0,0,0,0.7)',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = 'rgba(0,0,0,0.6)'
-            e.currentTarget.style.color = 'rgba(255,255,255,0.95)'
+            e.currentTarget.style.color = 'rgba(0,0,0,0.95)'
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = 'rgba(0,0,0,0.4)'
-            e.currentTarget.style.color = 'rgba(255,255,255,0.7)'
+            e.currentTarget.style.color = 'rgba(0,0,0,0.7)'
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -108,7 +108,7 @@ export default function ProjectDetail({ project, onClose }) {
             className="w-full aspect-[16/9] overflow-hidden"
             style={{
               background: 'linear-gradient(145deg, #252528 0%, #1a1a1e 100%)',
-              borderBottom: '1px solid rgba(255,255,255,0.05)',
+              borderBottom: '1px solid rgba(0,0,0,0.05)',
             }}
           >
             <img
@@ -124,7 +124,7 @@ export default function ProjectDetail({ project, onClose }) {
           {(project.year || project.role) && (
             <div
               className="flex gap-2 flex-wrap mb-4 text-[10px] tracking-[0.15em] uppercase"
-              style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 400 }}
+              style={{ color: 'rgba(0,0,0,0.35)', fontWeight: 400 }}
             >
               {project.year && <span>{project.year}</span>}
               {project.year && project.role && <span>·</span>}
@@ -154,9 +154,9 @@ export default function ProjectDetail({ project, onClose }) {
                   key={tag}
                   className="px-2.5 py-1 rounded-full"
                   style={{
-                    color: 'rgba(255,255,255,0.45)',
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.06)',
+                    color: 'rgba(0,0,0,0.45)',
+                    background: 'rgba(0,0,0,0.05)',
+                    border: '1px solid rgba(0,0,0,0.06)',
                     fontSize: '10px',
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
@@ -178,7 +178,7 @@ export default function ProjectDetail({ project, onClose }) {
           {project.goal && (
             <section className="mt-10">
               <h3 style={sectionHeading}>Goal</h3>
-              <div className="mt-2 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.08)' }} />
+              <div className="mt-2 mb-4 h-px w-8" style={{ background: 'rgba(0,0,0,0.08)' }} />
               <p style={bodyText}>{project.goal}</p>
             </section>
           )}
@@ -187,7 +187,7 @@ export default function ProjectDetail({ project, onClose }) {
           {project.content && (
             <section className="mt-10">
               <h3 style={sectionHeading}>About</h3>
-              <div className="mt-2 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.08)' }} />
+              <div className="mt-2 mb-4 h-px w-8" style={{ background: 'rgba(0,0,0,0.08)' }} />
               {project.content.split('\n\n').map((para, i) => (
                 <p key={i} className={i > 0 ? 'mt-4' : ''} style={bodyText}>
                   {para}
@@ -200,11 +200,11 @@ export default function ProjectDetail({ project, onClose }) {
           {project.highlights && project.highlights.length > 0 && (
             <section className="mt-10">
               <h3 style={sectionHeading}>Highlights</h3>
-              <div className="mt-2 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.08)' }} />
+              <div className="mt-2 mb-4 h-px w-8" style={{ background: 'rgba(0,0,0,0.08)' }} />
               <ul className="space-y-2.5">
                 {project.highlights.map((item, i) => (
                   <li key={i} className="flex gap-3" style={bodyText}>
-                    <span style={{ color: 'rgba(255,255,255,0.3)', flexShrink: 0 }}>—</span>
+                    <span style={{ color: 'rgba(0,0,0,0.3)', flexShrink: 0 }}>—</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -216,16 +216,16 @@ export default function ProjectDetail({ project, onClose }) {
           {project.stack && project.stack.length > 0 && (
             <section className="mt-10">
               <h3 style={sectionHeading}>Stack</h3>
-              <div className="mt-2 mb-4 h-px w-8" style={{ background: 'rgba(255,255,255,0.08)' }} />
+              <div className="mt-2 mb-4 h-px w-8" style={{ background: 'rgba(0,0,0,0.08)' }} />
               <div className="flex flex-wrap gap-2">
                 {project.stack.map((tech) => (
                   <span
                     key={tech}
                     className="px-3 py-1.5 rounded-full"
                     style={{
-                      color: 'rgba(255,255,255,0.55)',
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.06)',
+                      color: 'rgba(0,0,0,0.55)',
+                      background: 'rgba(0,0,0,0.04)',
+                      border: '1px solid rgba(0,0,0,0.06)',
                       fontSize: 'clamp(0.7rem, 1vw, 0.78rem)',
                       fontWeight: 300,
                       letterSpacing: '0.03em',
@@ -240,7 +240,7 @@ export default function ProjectDetail({ project, onClose }) {
 
           {/* Links */}
           {(project.links?.live || project.links?.github) && (
-            <section className="mt-10 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+            <section className="mt-10 pt-8" style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }}>
               <div className="flex flex-wrap gap-3">
                 {project.links?.live && (
                   <a
@@ -249,12 +249,12 @@ export default function ProjectDetail({ project, onClose }) {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
                     style={{
-                      color: 'rgba(255,255,255,0.9)',
-                      background: 'rgba(255,255,255,0.08)',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      color: 'rgba(0,0,0,0.9)',
+                      background: 'rgba(0,0,0,0.08)',
+                      border: '1px solid rgba(0,0,0,0.1)',
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)' }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0,0,0,0.12)' }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(0,0,0,0.08)' }}
                   >
                     <LinkIcon type="external" />
                     Visit Live
@@ -267,11 +267,11 @@ export default function ProjectDetail({ project, onClose }) {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
                     style={{
-                      color: 'rgba(255,255,255,0.5)',
+                      color: 'rgba(0,0,0,0.5)',
                       background: 'transparent',
-                      border: '1px solid rgba(255,255,255,0.06)',
+                      border: '1px solid rgba(0,0,0,0.06)',
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0,0,0,0.04)' }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
                   >
                     <LinkIcon type="github" />

@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const inputStyle = {
-  background: 'rgba(255,255,255,0.04)',
-  border: '1px solid rgba(255,255,255,0.08)',
-  color: 'rgba(255,255,255,0.9)',
+  background: 'rgba(0,0,0,0.04)',
+  border: '1px solid rgba(0,0,0,0.08)',
+  color: 'rgba(0,0,0,0.9)',
   borderRadius: '8px',
   padding: '10px 14px',
   fontSize: '13px',
@@ -14,7 +14,7 @@ const inputStyle = {
 }
 
 const labelStyle = {
-  color: 'rgba(255,255,255,0.5)',
+  color: 'rgba(0,0,0,0.5)',
   fontSize: '11px',
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
@@ -83,7 +83,7 @@ export default function AddProjectModal({ onClose, onAdd }) {
         className="w-full max-w-lg rounded-2xl p-5 sm:p-8 mx-3 sm:mx-0 overflow-y-auto"
         style={{
           background: '#1a1a1e',
-          border: '1px solid rgba(255,255,255,0.08)',
+          border: '1px solid rgba(0,0,0,0.08)',
           boxShadow: '0 24px 80px rgba(0,0,0,0.5)',
           maxHeight: '90vh',
         }}
@@ -94,7 +94,7 @@ export default function AddProjectModal({ onClose, onAdd }) {
             fontFamily: 'var(--font-display)',
             fontSize: '1.2rem',
             fontWeight: 300,
-            color: 'rgba(255,255,255,0.9)',
+            color: 'rgba(0,0,0,0.9)',
           }}
         >
           Add Project
@@ -242,9 +242,9 @@ export default function AddProjectModal({ onClose, onAdd }) {
               onClick={onClose}
               className="flex-1 py-2.5 rounded-full text-[11px] tracking-[0.12em] uppercase cursor-pointer transition-all duration-300"
               style={{
-                color: 'rgba(255,255,255,0.5)',
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.06)',
+                color: 'rgba(0,0,0,0.5)',
+                background: 'rgba(0,0,0,0.04)',
+                border: '1px solid rgba(0,0,0,0.06)',
               }}
             >
               Cancel
@@ -254,8 +254,8 @@ export default function AddProjectModal({ onClose, onAdd }) {
               className="flex-1 py-2.5 rounded-full text-[11px] tracking-[0.12em] uppercase cursor-pointer transition-all duration-300"
               style={{
                 color: '#0a0a0a',
-                background: 'rgba(255,255,255,0.85)',
-                border: '1px solid rgba(255,255,255,0.9)',
+                background: 'rgba(0,0,0,0.85)',
+                border: '1px solid rgba(0,0,0,0.9)',
                 fontWeight: 500,
               }}
             >

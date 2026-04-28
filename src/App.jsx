@@ -21,13 +21,14 @@ export default function App() {
   const showGallery = state === 'open'
 
   return (
-    <div className="w-screen relative overflow-hidden" style={{ background: 'var(--bg)', height: '100dvh' }}>
-      <div
-        style={{
-          opacity: state === 'open' ? 0 : 1,
-          transition: 'opacity 0.3s ease',
-        }}
-      >
+    <div
+      className="w-screen relative overflow-hidden"
+      style={{
+        background: 'var(--bg)',
+        height: '100dvh',
+      }}
+    >
+      <div>
         <BackgroundText />
       </div>
 
@@ -66,7 +67,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
             exit={{ opacity: 0, transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] } }}
-            className="absolute inset-0 z-20 overflow-y-auto overflow-x-hidden"
+            className="theme-light-paper absolute inset-0 z-20 overflow-y-auto overflow-x-hidden"
           >
             <ProjectGallery onClose={handleClose} />
           </motion.div>

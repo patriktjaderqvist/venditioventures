@@ -44,7 +44,7 @@ export default function ProjectCard({ project, isAdmin, onRemove, onOpen }) {
       className="relative group overflow-hidden flex flex-col cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
       whileHover={{
         scale: 1.03,
-        boxShadow: '0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.12)',
+        boxShadow: '0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.12)',
         transition: { duration: 0.35, ease: [0.25, 0.8, 0.25, 1] },
       }}
       style={{
@@ -90,16 +90,16 @@ export default function ProjectCard({ project, isAdmin, onRemove, onOpen }) {
         ) : (
           /* Wireframe-style placeholder like the reference */
           <div className="w-[75%] h-[70%] relative">
-            <div className="h-2 w-16 rounded-full mb-2" style={{ background: 'rgba(255,255,255,0.14)' }} />
-            <div className="h-2.5 w-28 rounded-full mb-1.5" style={{ background: 'rgba(255,255,255,0.16)' }} />
-            <div className="h-2 w-20 rounded-full mb-4" style={{ background: 'rgba(255,255,255,0.1)' }} />
+            <div className="h-2 w-16 rounded-full mb-2" style={{ background: 'rgba(0,0,0,0.14)' }} />
+            <div className="h-2.5 w-28 rounded-full mb-1.5" style={{ background: 'rgba(0,0,0,0.16)' }} />
+            <div className="h-2 w-20 rounded-full mb-4" style={{ background: 'rgba(0,0,0,0.1)' }} />
             <div className="flex gap-2 mb-2">
-              <div className="h-10 w-16 rounded" style={{ background: 'rgba(255,255,255,0.08)' }} />
-              <div className="h-10 w-16 rounded" style={{ background: 'rgba(255,255,255,0.08)' }} />
-              <div className="h-10 w-16 rounded" style={{ background: 'rgba(255,255,255,0.08)' }} />
+              <div className="h-10 w-16 rounded" style={{ background: 'rgba(0,0,0,0.08)' }} />
+              <div className="h-10 w-16 rounded" style={{ background: 'rgba(0,0,0,0.08)' }} />
+              <div className="h-10 w-16 rounded" style={{ background: 'rgba(0,0,0,0.08)' }} />
             </div>
-            <div className="h-1.5 w-full rounded-full mb-1.5" style={{ background: 'rgba(255,255,255,0.06)' }} />
-            <div className="h-1.5 w-3/4 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }} />
+            <div className="h-1.5 w-full rounded-full mb-1.5" style={{ background: 'rgba(0,0,0,0.06)' }} />
+            <div className="h-1.5 w-3/4 rounded-full" style={{ background: 'rgba(0,0,0,0.06)' }} />
           </div>
         )}
       </div>

@@ -125,13 +125,15 @@
 
 .folder-tab {
   position: absolute;
-  top: -26px;
-  left: 20px;
-  width: 100px;
-  height: 30px;
-  clip-path: polygon(0 100%, 0 20%, 8% 0, 80% 0, 100% 45%, 100% 100%);
+  /* 40% of folder width, flush left, lower stick-up (about 60% of tab height).
+     Slight rounding on the top-left so the corner isn't razor-sharp. */
+  top: -3.6vmin;
+  left: 0;
+  width: 20vmin;
+  height: 6vmin;
+  clip-path: polygon(0 100%, 0 0, 80% 0, 100% 45%, 100% 100%);
   transform: translateZ(-8px);
-  border-radius: 6px 6px 0 0;
+  border-radius: 6px 0 0 0;
   box-shadow:
     inset 0 1px 0 rgba(180,190,200,0.12),
     inset 0 -1px 2px rgba(0,0,0,0.6);
@@ -142,6 +144,81 @@
   background: #1a1a1e;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
   transform: translateZ(-4px);
+}
+
+/* ── Stacked papers inside the folder ── */
+/* Three off-white sheets, slightly inset from the folder, sitting between
+   the inner face (-4px) and the front cover (8px). Sharp corners, paper-like
+   fiber texture, narrow drop shadows so each page reads as a separate Z layer. */
+.folder-paper {
+  position: absolute;
+  border-radius: 1px;
+  pointer-events: none;
+  background-color: #ece9e1;
+  background-image:
+    /* faint diagonal cross-hatch fiber */
+    repeating-linear-gradient(45deg,
+      rgba(120,110,90,0.025) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(-45deg,
+      rgba(120,110,90,0.025) 0 1px, transparent 1px 3px),
+    /* fiber noise */
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.5  0 0 0 0 0.42  0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E"),
+    /* subtle warm vignette */
+    radial-gradient(ellipse at 50% 40%, #f3f0e8 0%, #e6e2d8 100%);
+  background-size: auto, auto, 180px 180px, auto;
+}
+
+.folder-paper-back {
+  top: 21px;
+  left: 19px;
+  right: 19px;
+  bottom: 11px;
+  background-color: #ddd7c9;
+  transform: translateZ(0px);
+  box-shadow:
+    0 2px 3px rgba(0,0,0,0.4),
+    0 1px 0 rgba(0,0,0,0.22);
+}
+
+.folder-paper-mid {
+  top: 18px;
+  left: 17px;
+  right: 17px;
+  bottom: 13px;
+  background-color: #e6e1d3;
+  transform: translateZ(2px);
+  box-shadow:
+    0 2px 3px rgba(0,0,0,0.38),
+    0 1px 0 rgba(0,0,0,0.2);
+}
+
+/* Top sheet — single element shaped as paper body with an index tab cut up
+   from its top edge. The tab's left edge is the same as the body paper's
+   left edge, so the left side is one continuous straight line from the top
+   of the tab all the way down to the bottom of the paper. The body's top
+   edge runs from the tab's right shoulder over to the body paper's right
+   edge, with leather framing left, right, and bottom. */
+.folder-paper-front {
+  top: calc(-3.6vmin + 18px);
+  left: 0;
+  right: 0;
+  bottom: 15px;
+  transform: translateZ(4px);
+  border-radius: 0;
+  /* Body paper sits a bit higher (11px top inset, 15px on the other sides).
+     Paper tab top is 18px below the leather tab top. The tab's right-side
+     angle is parallel to the leather tab's angle (slope 2.7vmin/4vmin) so
+     the two angled corners align visually. */
+  clip-path: polygon(
+    15px 0,
+    16vmin 0,
+    calc(20vmin - 15px) calc(2.7vmin - 10px),
+    calc(20vmin - 15px) calc(3.6vmin - 7px),
+    calc(100% - 15px) calc(3.6vmin - 7px),
+    calc(100% - 15px) 100%,
+    15px 100%
+  );
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.42));
 }
 
 .folder-front {
@@ -196,25 +273,38 @@
 }
 
 /* ── Silver A-buckle (upside-down) ── */
+/* Sibling of the strap (so it renders z-above), but rotates around the same pivot
+   as the front cover so it stays glued to the cover during opening. */
 .folder-buckle {
   position: absolute;
   left: 50%;
   top: calc(25% - 30px);
-  transform: translateX(-50%) translateZ(13px);
+  transform: translateX(-50%) translateZ(15px);
+  /* Pivot at the folder body's bottom center — same as .folder-front's origin.
+     Y offset = (folder body bottom) - (buckle top) = 75% of folder height + 30px. */
+  transform-origin: 50% calc(0.75 * (50vmin / 1.414) + 30px);
   width: 48px;
   height: 48px;
   z-index: 5;
   pointer-events: none;
+  /* Disappear at the same rotation angle as the front cover (backface culling) */
+  backface-visibility: hidden;
   /* Stacked drop-shadows simulate a thick metallic slab */
   filter:
     drop-shadow(0 1px 0 rgba(60,64,70,1))
     drop-shadow(0 2px 0 rgba(40,42,48,1))
     drop-shadow(0 3px 0 rgba(22,24,28,1))
     drop-shadow(0 5px 6px rgba(0,0,0,0.65));
+  transition: transform 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* Buckle rotates exactly like the front cover — same angle, origin, and timing */
+.folder-buckle.open {
+  transform: translateX(-50%) translateZ(15px) rotateX(-90deg);
 }
 
 /* ── Leather strap ── */
-/* Single front segment, static (no unlatch animation). */
+/* Front segment that retracts upward in sync with the open trigger. */
 .folder-strap-front {
   position: absolute;
   left: 50%;
@@ -222,6 +312,7 @@
   width: 18px;
   height: calc(25% - 3px);
   transform: translateX(-50%) translateZ(12px);
+  transform-origin: top center;
   border-radius: 3px 3px 2px 2px;
   background:
     url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E"),
@@ -236,6 +327,13 @@
     1px 2px 3px rgba(0,0,0,0.4);
   z-index: 4;
   pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Strap retracts upward into the folder — scaleY 0 leaves nothing above the top edge.
+   Fires at the start of the open trigger, finishing well before the front panel rotation. */
+.folder-strap-front.open {
+  transform: translateX(-50%) translateZ(-4px) scaleY(0);
 }
 .folder-strap-front::before,
 .folder-strap-front::after {
@@ -257,5 +355,27 @@
   }
   .folder-perspective {
     perspective: 800px;
+  }
+  /* Buckle pivot follows the mobile folder height formula */
+  .folder-buckle {
+    transform-origin: 50% calc(0.75 * (55vmin * 1.414) + 30px);
+  }
+  /* Tab follows the wider mobile folder (55vmin) — still 40% width, 100:30 box */
+  .folder-tab {
+    width: 22vmin;
+    height: 6.6vmin;
+    top: -3.96vmin;
+  }
+  .folder-paper-front {
+    top: calc(-3.96vmin + 18px);
+    clip-path: polygon(
+      15px 0,
+      17.6vmin 0,
+      calc(22vmin - 15px) calc(2.97vmin - 10px),
+      calc(22vmin - 15px) calc(3.96vmin - 7px),
+      calc(100% - 15px) calc(3.96vmin - 7px),
+      calc(100% - 15px) 100%,
+      15px 100%
+    );
   }
 }
